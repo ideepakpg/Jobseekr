@@ -1,11 +1,13 @@
 ﻿using Jobseekr.Models;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Jobseekr.Controllers
 {
     public class JobseekrController : Controller
     {
-        EmployeeDBContext obj = new EmployeeDBContext();
+        private JobseekrDBContext obj = new JobseekrDBContext();
         // GET: Jobseekr
         public ActionResult Index()
         {
@@ -20,10 +22,23 @@ namespace Jobseekr.Controllers
         }
 
         // Action to handle user login
-        public ActionResult Login()
+        public ActionResult Login(EmployeeLogin model)
         {
-            // Add your login logic here
-            return View();
+            if (ModelState.IsValid)
+            {
+                var user = obj.employeeLogins.SingleOrDefault(u => u.Username == model.Username);
+
+                if (user != null && user.Password == model.Password)
+                {
+                    FormsAuthentication.SetAuthCookie(model.Username, false);
+                    return RedirectToAction("Welcome"); // Redirect to a secure page
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
+            }
+            return View(model);
         }
 
         // Action to handle user registration
