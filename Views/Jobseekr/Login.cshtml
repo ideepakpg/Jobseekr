@@ -2,19 +2,34 @@
 
 <h2>Login</h2>
 
-@using (Html.BeginForm("Login", "Register", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Username, "Username", new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, "Password", new { @class = "control-label" })
-        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-    </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
+@{
+    ViewBag.Title = "Login";
 }
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Login", "Jobseekr", FormMethod.Post, new { @class = "form", id = "login-form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Username, new { @class = "control-label" })
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, new { @class = "control-label" })
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="login-button">Login</button>
+                    }
+                    <div id="error-message" class="text-danger" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
