@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jobseekr.Models
 {
-    [Table("EmployeeLogin")]
+    [Table("Login")]
     public class EmployeeLogin
     {
         [Key]
