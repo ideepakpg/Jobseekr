@@ -5,5 +5,36 @@
 
 <h2>LandingPage</h2>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include Bootstrap JS (optional, for some Bootstrap features) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h2>Welcome</h2>
+        <p>Please choose an option:</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <a href="@Url.Action("Login", "Jobseekr")" class="btn btn-primary btn-lg btn-block">Login</a>
+            </div>
+            <div class="col-md-6">
+                <a href="@Url.Action("Registration", "Jobseekr")" class="btn btn-success btn-lg btn-block">Register</a>
+            </div>
+        </div>
+
+    </div>
+
+    
+</body>
+</html>
+
+
 
 
