@@ -190,6 +190,10 @@
     <Content Include="Views\Jobseekr\WelcomePage.cshtml" />
     <Content Include="Views\Jobseekr\RegistrationSuccess.cshtml" />
     <Content Include="Views\Jobseekr\Registration.cshtml" />
+    <Content Include="Views\Jobseekr\Create.cshtml" />
+    <Content Include="Views\Jobseekr\Edit.cshtml" />
+    <Content Include="Views\Jobseekr\Details.cshtml" />
+    <Content Include="Views\Jobseekr\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,5 @@
 ﻿using Jobseekr.Models;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -37,7 +38,7 @@ namespace Jobseekr.Controllers
             {
                 using (var dbContext = new JobseekrDBContext())
                 {
-                    var user = obj.employeeLogins.SingleOrDefault(u => u.Username == model.Username);
+                    var user = obj.employeeLogins.FirstOrDefault(u => u.Username == model.Username);
 
                     if (user != null && user.Password == model.Password)
                     {
@@ -115,5 +116,112 @@ namespace Jobseekr.Controllers
             // logic here
             return View();
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(JobListing jobListings)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    // Add the job listing to the database
+                    dbContext.jobListings.Add(jobListings);
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage action
+            }
+
+            return View(jobListings);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Retrieve the job listing by ID
+                var jobListing = dbContext.jobListings.Find(id);
+
+                if (jobListing == null)
+                {
+                    return HttpNotFound(); // or return an appropriate error view
+                }
+
+                return View(jobListing);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(JobListing jobListing)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    dbContext.Entry(jobListing).State = EntityState.Modified;
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage after successful edit
+            }
+
+            return View(jobListing);
+        }
+
+        public ActionResult Details(int id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Retrieve the job listing by ID
+                var jobListing = dbContext.jobListings.Find(id);
+
+                if (jobListing == null)
+                {
+                    return HttpNotFound(); // or return an appropriate error view
+                }
+
+                return View(jobListing);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Retrieve the job listing by ID
+                var jobListing = dbContext.jobListings.Find(id);
+
+                if (jobListing == null)
+                {
+                    return HttpNotFound(); // or return an appropriate error view
+                }
+
+                return View(jobListing);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Retrieve the job listing by ID
+                var jobListing = dbContext.jobListings.Find(id);
+
+                if (jobListing != null)
+                {
+                    dbContext.jobListings.Remove(jobListing);
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage after successful deletion
+            }
+        }
+
     }
 }
