@@ -56,12 +56,6 @@ namespace Jobseekr.Controllers
             return View(model);
         }
 
-        public ActionResult WelcomePage()
-        {
-            var jobListings = obj.jobListings.ToList();
-            return View(jobListings);
-        }
-
 
         // Action to handle user registration
         [HttpGet]
@@ -117,6 +111,14 @@ namespace Jobseekr.Controllers
             return View();
         }
 
+        // job provider aka employer section starts here
+
+        public ActionResult WelcomePage()
+        {
+            var jobListings = obj.jobListings.ToList();
+            return View(jobListings);
+        }
+
         public ActionResult Create()
         {
             return View();
@@ -167,7 +169,7 @@ namespace Jobseekr.Controllers
                     dbContext.SaveChanges();
                 }
 
-                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage after successful edit
+                return RedirectToAction("WelcomePage");
             }
 
             return View(jobListing);
@@ -198,7 +200,7 @@ namespace Jobseekr.Controllers
 
                 if (jobListing == null)
                 {
-                    return HttpNotFound(); // or return an appropriate error view
+                    return HttpNotFound(); // error view
                 }
 
                 return View(jobListing);
@@ -219,9 +221,42 @@ namespace Jobseekr.Controllers
                     dbContext.SaveChanges();
                 }
 
-                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage after successful deletion
+                return RedirectToAction("WelcomePage");
             }
         }
 
+        // job provider aka employer section ends here
+
+
+        // job employee aka seeker section starts here
+
+        public ActionResult AvailableJobs()
+        {
+            var jobListings = obj.jobListings.ToList();
+            return View(jobListings);
+        }
+
+        public ActionResult ApplyForJob(int id)
+        {
+            // Retrieve the job listing by its ID
+            var jobListing = obj.jobListings.Find(id);
+
+            if (jobListing == null)
+            {
+                return HttpNotFound(); // error view
+            }
+
+            // logic to handle the job application
+
+            return RedirectToAction("ApplicationConfirmation");
+        }
+
+        public ActionResult ApplicationConfirmation()
+        {
+            return View();
+        }
+
+
+        // job employee aka seeker section starts here
     }
 }
