@@ -194,6 +194,8 @@
     <Content Include="Views\Jobseekr\Edit.cshtml" />
     <Content Include="Views\Jobseekr\Details.cshtml" />
     <Content Include="Views\Jobseekr\Delete.cshtml" />
+    <Content Include="Views\Jobseekr\AvailableJobs.cshtml" />
+    <Content Include="Views\Jobseekr\ApplicationConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
