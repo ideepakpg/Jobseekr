@@ -1,0 +1,38 @@
+﻿@model List<Jobseekr.Models.JobListing>
+
+@{
+    ViewBag.Title = "Available Jobs";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Available Jobs</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Salary</th>
+                    <th>PostedDate</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jobListing in Model)
+                {
+                    <tr>
+                        <td>@jobListing.JobTitle</td>
+                        <td>@jobListing.Description</td>
+                        <td>@jobListing.Location</td>
+                        <td>@jobListing.Salary</td>
+                        <td>@jobListing.PostedDate</td>
+                        <td>
+                            @Html.ActionLink("Apply", "ApplyForJob", "Jobseekr", new { id = jobListing.JobId }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
