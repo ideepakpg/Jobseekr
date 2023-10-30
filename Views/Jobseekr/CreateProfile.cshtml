@@ -1,0 +1,41 @@
+﻿@model Jobseekr.Models.CompanyProfile
+
+@{
+    ViewBag.Title = "Create Company Profile";
+}
+
+<div class="container">
+    <h2>Create Company Profile</h2>
+
+    @using (Html.BeginForm("CreateProfile", "Jobseekr", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <!-- Form fields for creating the company profile -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompanyName)
+            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location)
+            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Founded)
+            @Html.EditorFor(model => model.Founded, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contact)
+            @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Website)
+            @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <!-- Add other fields here -->
+        <button type="submit" class="btn btn-primary">Create new Profile</button>
+    }
+</div>
