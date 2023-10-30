@@ -131,6 +131,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyProfile.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
     <Compile Include="Models\JobListing.cs" />
     <Compile Include="Models\JobseekrDBContext.cs" />
@@ -196,6 +197,10 @@
     <Content Include="Views\Jobseekr\Delete.cshtml" />
     <Content Include="Views\Jobseekr\AvailableJobs.cshtml" />
     <Content Include="Views\Jobseekr\ApplicationConfirmation.cshtml" />
+    <Content Include="Views\Jobseekr\ViewProfile.cshtml" />
+    <Content Include="Views\Jobseekr\EditProfile.cshtml" />
+    <Content Include="Views\Jobseekr\CreateProfile.cshtml" />
+    <Content Include="Views\Jobseekr\ViewCompanyProfiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
