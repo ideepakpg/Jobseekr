@@ -1,0 +1,37 @@
+﻿@model Jobseekr.Models.CompanyProfile
+
+@using (Html.BeginForm("EditProfile", "Jobseekr", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <!-- Form fields for editing the company profile -->
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyId)
+        @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyName)
+        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description)
+        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Location)
+        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Founded)
+        @Html.EditorFor(model => model.Founded, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contact)
+        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Website)
+        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <!-- Add other fields here -->
+    <button type="submit" class="btn btn-primary">Save</button>
+}

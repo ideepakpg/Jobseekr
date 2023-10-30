@@ -1,4 +1,5 @@
 ﻿using Jobseekr.Models;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -225,6 +226,94 @@ namespace Jobseekr.Controllers
             }
         }
 
+        // Company profile management
+
+        [HttpGet]
+        public ActionResult CreateProfile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateProfile(CompanyProfile newProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the new company profile to the database
+                obj.companyProfiles.Add(newProfile);
+                obj.SaveChanges();
+
+                TempData["Message"] = "Company profile created successfully"; // Use TempData for displaying a success message
+
+                return RedirectToAction("ViewProfile");
+            }
+
+            return View(newProfile);
+        }
+
+
+        // Action to view the company profile
+        public ActionResult ViewProfile()
+        {
+            // Fetch all company profiles from the database
+            List<CompanyProfile> profiles = obj.companyProfiles.ToList();
+
+            return View(profiles);
+        }
+
+
+        // Action to edit the company profile
+        [HttpGet]
+        public ActionResult EditProfile(int id)
+        {
+            // Retrieve the company profile from the database using the provided ID
+            CompanyProfile profile = obj.companyProfiles.Find(id);
+
+            if (profile == null)
+            {
+                return HttpNotFound(); // Handle the case where the profile is not found
+            }
+
+            return View(profile);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(CompanyProfile updatedProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                // Retrieve the existing profile from the database using the updated profile's ID
+                CompanyProfile existingProfile = obj.companyProfiles.Find(updatedProfile.CompanyId);
+
+                if (existingProfile != null)
+                {
+                    // Update all properties of the existing profile
+                    existingProfile.CompanyName = updatedProfile.CompanyName;
+                    existingProfile.Description = updatedProfile.Description;
+                    existingProfile.Location = updatedProfile.Location;
+                    existingProfile.Founded = updatedProfile.Founded;
+                    existingProfile.Contact = updatedProfile.Contact;
+                    existingProfile.Website = updatedProfile.Website;
+
+                    // Save changes to the database
+                    obj.SaveChanges();
+
+                    TempData["Message"] = "Profile updated successfully"; // Use TempData for displaying a success message
+                }
+
+                return RedirectToAction("ViewProfile");
+            }
+
+            return View(updatedProfile);
+        }
+
+
+
+
+
+
         // job provider aka employer section ends here
 
 
@@ -255,6 +344,13 @@ namespace Jobseekr.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewCompanyProfiles()
+        {
+            var profiles = obj.companyProfiles.ToList(); // Retrieve all company profiles
+            return View(profiles);
+        }
+
 
 
         // job employee aka seeker section starts here
