@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Models\CompanyProfile.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
+    <Compile Include="Models\JobApplication.cs" />
     <Compile Include="Models\JobListing.cs" />
     <Compile Include="Models\JobseekrDBContext.cs" />
     <Compile Include="Models\EmployeeLogin.cs" />
