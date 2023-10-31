@@ -312,8 +312,9 @@ namespace Jobseekr.Controllers
 
 
 
-        // job provider aka employer section ends here
 
+
+        // job provider aka employer section ends here
 
 
         // job employee aka seeker section starts here
@@ -344,36 +345,10 @@ namespace Jobseekr.Controllers
             return View();
         }
 
-
-
-
-
         public ActionResult ViewCompanyProfiles()
         {
             var profiles = obj.companyProfiles.ToList(); // Retrieve all company profiles
             return View(profiles);
-        }
-
-
-        public ActionResult SearchJobs(string jobName, string cityName)   // view is in AvailableJobs.cshtml
-        {
-            IEnumerable<Jobseekr.Models.JobListing> jobListings;
-
-            if (!string.IsNullOrEmpty(jobName) || !string.IsNullOrEmpty(cityName))
-            {
-                // If search criteria is provided, filter job listings
-                jobListings = obj.jobListings
-                    .Where(j => (string.IsNullOrEmpty(jobName) || j.JobTitle.Contains(jobName))
-                                && (string.IsNullOrEmpty(cityName) || j.Location.Contains(cityName)))
-                    .ToList();
-            }
-            else
-            {
-                // If no search criteria is provided, show all available jobs
-                jobListings = obj.jobListings.ToList();
-            }
-
-            return View("AvailableJobs", jobListings);
         }
 
 
