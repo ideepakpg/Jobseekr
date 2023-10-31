@@ -14,6 +14,7 @@
     @Html.ActionLink("View Profile", "ViewProfile", "Jobseekr", new { /* optional route values */ }, new { @class = "btn btn-primary" })
 </p>
 
+
 <table class="table">
     <tr>
         <th>
@@ -38,19 +39,19 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.JobTitle)
+                @item.JobTitle
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @item.Description
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location)
+                @item.Location
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Salary)
+                @item.Salary.ToString("N0")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PostedDate)
+                @item.PostedDate.ToString("dd-MM-yyyy")
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.JobId }) |
