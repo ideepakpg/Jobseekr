@@ -11,6 +11,20 @@
         </div>
     </div>
     <h2 class="text-center">Available Jobs</h2>
+    @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.Label("Job Name")
+            @Html.TextBox("jobName", null, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("City Name")
+            @Html.TextBox("cityName", null, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Find Jobs</button>
+    }
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -19,7 +33,7 @@
                     <th>Description</th>
                     <th>Location</th>
                     <th>Salary</th>
-                    <th>PostedDate</th>
+                    <th>Posted Date</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -30,8 +44,8 @@
                         <td>@jobListing.JobTitle</td>
                         <td>@jobListing.Description</td>
                         <td>@jobListing.Location</td>
-                        <td>@jobListing.Salary</td>
-                        <td>@jobListing.PostedDate</td>
+                        <td>@jobListing.Salary.ToString("N0")</td>
+                        <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
                         <td>
                             @Html.ActionLink("Apply", "ApplyForJob", "Jobseekr", new { id = jobListing.JobId }, new { @class = "btn btn-primary" })
                         </td>
