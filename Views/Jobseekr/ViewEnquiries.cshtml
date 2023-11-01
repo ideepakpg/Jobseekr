@@ -1,0 +1,30 @@
+﻿@model List<Jobseekr.Models.Enquiry>
+
+@{
+    ViewBag.Title = "View Enquiries";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Enquiries</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enquiry in Model)
+            {
+                <tr>
+                    <td>@enquiry.Name</td>
+                    <td>@enquiry.Email</td>
+                    <td>@enquiry.Subject</td>
+                    <td>@enquiry.Message</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
