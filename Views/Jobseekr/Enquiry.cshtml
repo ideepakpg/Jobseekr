@@ -1,0 +1,105 @@
+﻿@model Jobseekr.Models.Enquiry
+
+@{
+    ViewBag.Title = "Enquiry";
+}
+
+<div class="container">
+    <h2>Send Enquiry</h2>
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("Enquiry", "Jobseekr", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    <div class="invalid-feedback">
+                        Please enter your name.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Email, new { @class = "form-control", required = "required", type = "email" })
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Subject, new { @class = "form-label" })
+                    @Html.EditorFor(model => model.Subject, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.Message, new { @class = "form-label" })
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = "4", required = "required" })
+                    <div class="invalid-feedback">
+                        Please enter your message.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+<div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+    Enquiry submitted successfully!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+    Enquiry submission failed. Please fill all fields and try again.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@*jquery*@
+<script>
+    $(document).ready(function () {
+        $("form").on("submit", function (e) {
+            e.preventDefault();
+
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Enquiry", "Jobseekr")",
+                data: $(this).serialize(),
+                success: function (data) {
+                    // Check the response from the server
+                    if (data.success) {
+                        // if submission is success - show the success alert
+                        $("#success-alert").fadeIn(500);
+
+                        // Hide the success alert after 1 seconds
+                        setTimeout(function () {
+                            $("#success-alert").fadeOut(500);
+                        }, 1000);
+                    } else {
+                        $("#error-alert").fadeIn(500);
+
+                        // 1 seconds (1000 milliseconds)
+                        setTimeout(function () {
+                            $("#error-alert").fadeOut(500);
+                        }, 1000);
+                    }
+                },
+                error: function () {
+                    // Ajax request encountered an error
+                    // show the error alert
+                    $("#error-alert").fadeIn(500, function () {
+                        $(this).fadeOut(1000); 
+                    });
+                }
+            });
+        });
+    });
+</script>
