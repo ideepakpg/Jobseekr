@@ -1,57 +1,62 @@
 ﻿@model List<Jobseekr.Models.JobListing>
 
-@{
-    ViewBag.Title = "Available Jobs";
-}
-
-<div class="container mt-5">
-    <div class="container mt-5">
-        <div class="text-center">
-            <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")" class="btn btn-primary">Company Profiles</a>
-        </div>
-    </div>
-    <h2 class="text-center">Available Jobs</h2>
-    @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
-    {
-        <div class="form-group">
-            @Html.Label("Job Name")
-            @Html.TextBox("jobName", null, new { @class = "form-control" })
-        </div>
-
-        <div class="form-group">
-            @Html.Label("City Name")
-            @Html.TextBox("cityName", null, new { @class = "form-control" })
-        </div>
-
-        <button type="submit" class="btn btn-primary">Find Jobs</button>
+    @{
+        ViewBag.Title = "Available Jobs";
     }
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Location</th>
-                    <th>Salary</th>
-                    <th>Posted Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var jobListing in Model)
-                {
+
+    <div class="container mt-5">
+        <div class="container mt-5">
+            <div class="text-center">
+                @*Company profile button*@
+                <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")" class="btn btn-primary">Company Profiles</a>
+                @*Enquiry button*@
+                <a href="@Url.Action("Enquiry", "Jobseekr")" class="btn btn-primary">Enquiry</a>
+
+            </div>
+        </div>
+        <h2 class="text-center">Available Jobs</h2>
+        @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
+        {
+            <div class="form-group">
+                @Html.Label("Job Name")
+                @Html.TextBox("jobName", null, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.Label("City Name")
+                @Html.TextBox("cityName", null, new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Find Jobs</button>
+        }
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>@jobListing.JobTitle</td>
-                        <td>@jobListing.Description</td>
-                        <td>@jobListing.Location</td>
-                        <td>@jobListing.Salary.ToString("N0")</td>
-                        <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
-                        <td>
-                            @Html.ActionLink("Apply", "ApplyForJob", "Jobseekr", new { id = jobListing.JobId }, new { @class = "btn btn-primary" })
-                        </td>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Salary</th>
+                        <th>Posted Date</th>
+                        <th>Apply</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var jobListing in Model)
+                    {
+                        <tr>
+                            <td>@jobListing.JobTitle</td>
+                            <td>@jobListing.Description</td>
+                            <td>@jobListing.Location</td>
+                            <td>@jobListing.Salary.ToString("N0")</td>
+                            <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
+                            @*Apply button*@
+                            <td>
+                                @Html.ActionLink("Apply", "ApplicationConfirmation", "Jobseekr", null, new { @class = "btn btn-primary" })
+                            </td>                      
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>

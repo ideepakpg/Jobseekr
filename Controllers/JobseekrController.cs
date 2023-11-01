@@ -310,7 +310,13 @@ namespace Jobseekr.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult ViewEnquiries()
+        {
+            var enquiries = obj.enquiryListings.ToList(); // Retrieve all employee enquires from the database.
 
+            return View(enquiries);
+        }
 
 
 
@@ -325,20 +331,6 @@ namespace Jobseekr.Controllers
             return View(jobListings);
         }
 
-        public ActionResult ApplyForJob(int id)
-        {
-            // Retrieve the job listing by its ID
-            var jobListing = obj.jobListings.Find(id);
-
-            if (jobListing == null)
-            {
-                return HttpNotFound(); // error view
-            }
-
-            // logic to handle the job application
-
-            return RedirectToAction("ApplicationConfirmation");
-        }
 
         public ActionResult ApplicationConfirmation()
         {
@@ -350,6 +342,50 @@ namespace Jobseekr.Controllers
             var profiles = obj.companyProfiles.ToList(); // Retrieve all company profiles
             return View(profiles);
         }
+
+        public ActionResult SearchJobs(string jobName, string cityName)   // view is in AvailableJobs.cshtml
+        {
+            IEnumerable<Jobseekr.Models.JobListing> jobListings;
+
+            if (!string.IsNullOrEmpty(jobName) || !string.IsNullOrEmpty(cityName))
+            {
+                // If search criteria is provided, filter job listings
+                jobListings = obj.jobListings
+                    .Where(j => (string.IsNullOrEmpty(jobName) || j.JobTitle.Contains(jobName))
+                                && (string.IsNullOrEmpty(cityName) || j.Location.Contains(cityName)))
+                    .ToList();
+            }
+            else
+            {
+                // If no search criteria is provided, show all available jobs
+                jobListings = obj.jobListings.ToList();
+            }
+
+            return View("AvailableJobs", jobListings);
+        }
+
+        [HttpGet]
+        public ActionResult Enquiry()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Enquiry(Enquiry enquiry)
+        {
+            if (ModelState.IsValid)
+            {
+                obj.enquiryListings.Add(enquiry);
+                obj.SaveChanges();
+                // Submission was successful
+                return Json(new { success = true });
+            }
+
+            // Submission failed
+            return Json(new { success = false });
+        }
+
 
 
 

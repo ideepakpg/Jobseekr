@@ -133,7 +133,7 @@
     </Compile>
     <Compile Include="Models\CompanyProfile.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
-    <Compile Include="Models\JobApplication.cs" />
+    <Compile Include="Models\Enquiry.cs" />
     <Compile Include="Models\JobListing.cs" />
     <Compile Include="Models\JobseekrDBContext.cs" />
     <Compile Include="Models\EmployeeLogin.cs" />
@@ -202,6 +202,8 @@
     <Content Include="Views\Jobseekr\EditProfile.cshtml" />
     <Content Include="Views\Jobseekr\CreateProfile.cshtml" />
     <Content Include="Views\Jobseekr\ViewCompanyProfiles.cshtml" />
+    <Content Include="Views\Jobseekr\Enquiry.cshtml" />
+    <Content Include="Views\Jobseekr\ViewEnquiries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
