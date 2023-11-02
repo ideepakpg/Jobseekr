@@ -1,0 +1,28 @@
+﻿@model List<Jobseekr.Models.JobApplication>
+
+@{
+    ViewBag.Title = "Job Applications";
+}
+
+<h2>Job Applications</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Applicant Name</th>
+            <th>Applicant Email</th>
+            <th>Resume</th>
+            <!-- Other columns as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.ApplicantName</td>
+                <td>@application.ApplicantEmail</td>
+                <td><a href="@application.Resume" target="_blank">Resume Link</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
