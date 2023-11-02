@@ -313,10 +313,23 @@ namespace Jobseekr.Controllers
         [HttpGet]
         public ActionResult ViewEnquiries()
         {
-            var enquiries = obj.enquiryListings.ToList(); // Retrieve all employee enquires from the database.
+            var enquiries = obj.enquiryListings.ToList(); // get all employee enquires from the database.
 
             return View(enquiries);
         }
+
+
+        //to view job application applied by the employee
+        public ActionResult ViewJobApplications()
+        {
+            // Retrieve job applications from database
+            using (var dbContext = new JobseekrDBContext())
+            {
+                var jobApplications = dbContext.jobApplicationListings.ToList();
+                return View(jobApplications);
+            }
+        }
+
 
 
 
@@ -330,6 +343,33 @@ namespace Jobseekr.Controllers
             var jobListings = obj.jobListings.ToList();
             return View(jobListings);
         }
+
+        public ActionResult ApplyJob(int jobId)
+        {
+            JobApplication application = new JobApplication { JobId = jobId };
+            return View("SubmitApplication", application);
+        }
+
+
+        [HttpPost]
+        public ActionResult SubmitApplication(JobApplication application)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    dbContext.jobApplicationListings.Add(application);
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("ApplicationConfirmation");
+            }
+
+            return View(application);
+        }
+
+
+
 
 
         public ActionResult ApplicationConfirmation()
