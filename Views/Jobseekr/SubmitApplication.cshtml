@@ -1,0 +1,29 @@
+﻿@model Jobseekr.Models.JobApplication
+
+@{
+    ViewBag.Title = "Submit Application";
+}
+
+<h2>Submit Job Application</h2>
+
+@using (Html.BeginForm("SubmitApplication", "Jobseekr", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.JobId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApplicantName)
+        @Html.TextBoxFor(model => model.ApplicantName, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ApplicantEmail)
+        @Html.TextBoxFor(model => model.ApplicantEmail, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Resume (Google Drive Link only)")
+        @Html.TextBoxFor(model => model.Resume, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Apply</button>
+}
