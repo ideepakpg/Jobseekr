@@ -52,7 +52,7 @@
                             <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
                             @*Apply button*@
                             <td>
-                                @Html.ActionLink("Apply", "ApplicationConfirmation", "Jobseekr", null, new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn btn-primary" })
                             </td>                      
                         </tr>
                     }
