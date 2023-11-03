@@ -10,5 +10,6 @@ namespace Jobseekr.Models
         public DbSet<CompanyProfile> companyProfiles { get; set; }
         public DbSet<Enquiry> enquiryListings { get; set; }
         public DbSet<JobApplication> jobApplicationListings { get; set; }
+        public DbSet<EmployerRegistration> employerRegistrations { get; set; }
     }
 }
