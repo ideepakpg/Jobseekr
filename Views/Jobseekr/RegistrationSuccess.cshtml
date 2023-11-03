@@ -5,3 +5,19 @@
 
 <h2>RegistrationSuccess</h2>
 
+<div class="text-center">
+    <p>Your registration was successful. You can now log in.</p>
+    <a href="@Url.Action("Login", "Jobseekr")" class="btn btn-primary btn-login">Login Now</a>
+</div>
+
+<style>
+    .btn-login {
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .btn-login:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+</style>
+

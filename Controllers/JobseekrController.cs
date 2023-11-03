@@ -9,7 +9,7 @@ namespace Jobseekr.Controllers
     public class JobseekrController : Controller
     {
         private JobseekrDBContext obj = new JobseekrDBContext();
-        // GET: Jobseekr
+
         public ActionResult Index()
         {
             return View();
@@ -32,7 +32,7 @@ namespace Jobseekr.Controllers
             return View("LandingPage");
         }
 
-        // Action to handle user login
+        // Action to handle employee login
         public ActionResult Login(EmployeeLogin model)
         {
             if (ModelState.IsValid)
@@ -43,10 +43,25 @@ namespace Jobseekr.Controllers
 
                     if (user != null && user.Password == model.Password)
                     {
+                        Session["UserRole"] = user.Role;
 
-                        //FormsAuthentication.SetAuthCookie(model.Username, false);
+                        if (user.Role == "Employee")
+                        {
+                            // Redirect to Employee page
+                            return RedirectToAction("AvailableJobs");
+                        }
+                        else if (user.Role == "Employer")
+                        {
+                            // Redirect to Employer page
+                            return RedirectToAction("WelcomePage");
+                        }
+                        else if (user.Role == "Admin")
+                        {
+                            // Redirect to Admin page
+                            return RedirectToAction("AdminPage");
+                        }
+                        //return RedirectToAction("WelcomePage");
 
-                        return RedirectToAction("WelcomePage");
                     }
                     else
                     {
@@ -54,18 +69,26 @@ namespace Jobseekr.Controllers
                     }
                 }
             }
+            ViewBag.ShowErrorMessage = true;
             return View(model);
         }
 
 
-        // Action to handle user registration
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("LandingPage");
+        }
+
+
+        // Action for Employee registration
         [HttpGet]
         public ActionResult Registration()
         {
 
             EmployeeRegistration obj2 = new EmployeeRegistration();
             obj.employeeRegistrations.Add(obj2);
-            // If registration data is not valid, redisplay the registration form with validation errors
             return View();
         }
 
@@ -90,7 +113,8 @@ namespace Jobseekr.Controllers
                     var login = new EmployeeLogin
                     {
                         Username = employeeRegistrations.Username,
-                        Password = employeeRegistrations.Password
+                        Password = employeeRegistrations.Password,
+                        Role = "Employee"
                     };
 
                     // Add and save the instances to their respective tables
@@ -105,21 +129,75 @@ namespace Jobseekr.Controllers
             return View();
         }
 
+        // Registration for Employer 
+        [HttpGet]
+        public ActionResult EmployerRegistration()
+        {
+            EmployerRegistration obj = new EmployerRegistration();
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult EmployerRegistration(EmployerRegistration employerRegistration)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    // Create an instance for the employer registration
+                    var registration = new EmployerRegistration
+                    {
+                        FirstName = employerRegistration.FirstName,
+                        LastName = employerRegistration.LastName,
+                        EmailId = employerRegistration.EmailId,
+                        Username = employerRegistration.Username,
+                        Password = employerRegistration.Password,
+                        MobileNumber = employerRegistration.MobileNumber
+                    };
+
+                    // Add the employer registration to the EmployerRegistration table
+                    dbContext.employerRegistrations.Add(registration);
+                    dbContext.SaveChanges();
+
+                    // Create an instance for the login
+                    var login = new EmployeeLogin
+                    {
+                        Username = employerRegistration.Username,
+                        Password = employerRegistration.Password,
+                        Role = "Employer"
+                    };
+
+                    // Add the login information to the EmployeeLogin table
+                    dbContext.employeeLogins.Add(login);
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("RegistrationSuccess");
+            }
+
+            return View(employerRegistration);
+        }
+
+
+
 
         public ActionResult RegistrationSuccess()
         {
-            // logic here
+
             return View();
         }
 
         // job provider aka employer section starts here
 
-        public ActionResult WelcomePage()
+
+        public ActionResult WelcomePage()  /*for employer*/
         {
             var jobListings = obj.jobListings.ToList();
             return View(jobListings);
         }
 
+
+        //Available Jobs CRUD operations
         public ActionResult Create()
         {
             return View();
@@ -338,6 +416,7 @@ namespace Jobseekr.Controllers
 
         // job employee aka seeker section starts here
 
+
         public ActionResult AvailableJobs()
         {
             var jobListings = obj.jobListings.ToList();
@@ -367,8 +446,6 @@ namespace Jobseekr.Controllers
 
             return View(application);
         }
-
-
 
 
 
@@ -425,6 +502,7 @@ namespace Jobseekr.Controllers
             // Submission failed
             return Json(new { success = false });
         }
+
 
 
 

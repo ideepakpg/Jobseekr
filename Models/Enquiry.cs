@@ -8,13 +8,13 @@ namespace Jobseekr.Models
     {
         [Key]
         public int EnquiryId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Subject is required")]
         public string Subject { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Message is required")]
         public string Message { get; set; }
 
     }
