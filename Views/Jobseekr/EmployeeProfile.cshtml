@@ -1,0 +1,50 @@
+﻿@model Jobseekr.Models.EmployeeLogin
+
+@{
+    ViewBag.Title = "Employee Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2>Employee Profile</h2>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="w-25">First Name:</th>
+                                <td>@Model.FirstName</td>
+                            </tr>
+                            <tr>
+                                <th>Last Name:</th>
+                                <td>@Model.LastName</td>
+                            </tr>
+                            <tr>
+                                <th>Email Id:</th>
+                                <td>@Model.EmailId</td>
+                            </tr>
+                            <tr>
+                                <th>Username:</th>
+                                <td>@Model.Username</td>
+                            </tr>
+                            <tr>
+                                <th>Mobile Number:</th>
+                                <td>@Model.MobileNumber</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td>@Model.Role</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="@Url.Action("EditProfile", "Employee")" class="btn btn-primary">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
