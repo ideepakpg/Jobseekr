@@ -3,15 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jobseekr.Models
 {
-    [Table("Login")]
-    public class EmployeeLogin     //this model class for both employee and employer to login
+    [Table("EmployeeLogin")]
+
+    public class EmployeeLogin    // this model is to fetch employee details to EmployeeProfile view(My Profile)
     {
         [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Username is required")]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string EmailId { get; set; }
         public string Username { get; set; }
-        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
+        public string MobileNumber { get; set; }
         public string Role { get; set; }
     }
 }
