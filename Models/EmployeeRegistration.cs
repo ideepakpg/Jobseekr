@@ -7,7 +7,7 @@ namespace Jobseekr.Models
     public class EmployeeRegistration
     {
         [Key]
-        public int RegId { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "First Name is required")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Second Name is required")]
