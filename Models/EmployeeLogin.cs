@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jobseekr.Models
 {
-    [Table("EmployeeLogin")]
+    [Table("EmployeeLoginProfile")]
 
-    public class EmployeeLogin    // this model is to fetch employee details to EmployeeProfile view(My Profile)
+    public class EmployeeLogin    // this model is for to fetch and pass employee details to EmployeeProfile view(My Profile)
     {
         [Key]
         public int Id { get; set; }
