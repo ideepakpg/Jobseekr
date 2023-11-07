@@ -134,12 +134,15 @@
     <Compile Include="Models\CompanyProfile.cs" />
     <Compile Include="Models\EmployeeLogin.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
+    <Compile Include="Models\EmployerLogin.cs" />
     <Compile Include="Models\EmployerRegistration.cs" />
     <Compile Include="Models\Enquiry.cs" />
     <Compile Include="Models\JobApplication.cs" />
     <Compile Include="Models\JobListing.cs" />
     <Compile Include="Models\JobseekrDBContext.cs" />
-    <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\LoginCommon.cs" />
+    <Compile Include="Models\LoginEmployee.cs" />
+    <Compile Include="Models\LoginEmployer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +214,7 @@
     <Content Include="Views\Jobseekr\ViewJobApplications.cshtml" />
     <Content Include="Views\Jobseekr\EmployerRegistration.cshtml" />
     <Content Include="Views\Jobseekr\EmployeeProfile.cshtml" />
+    <Content Include="Views\Jobseekr\EmployerProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
