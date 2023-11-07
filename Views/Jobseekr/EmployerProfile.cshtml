@@ -1,0 +1,45 @@
+﻿@model Jobseekr.Models.EmployerLogin
+
+@{
+    ViewBag.Title = "My Profile";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">My Profile</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table">
+                                <tr>
+                                    <th>First Name:</th>
+                                    <td>@Model.FirstName</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name:</th>
+                                    <td>@Model.LastName</td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td>@Model.EmailId</td>
+                                </tr>
+                                <tr>
+                                    <th>Mobile Number:</th>
+                                    <td>@Model.MobileNumber</td>
+                                </tr>
+                                <tr>
+                                    <th>Status:</th>
+                                    <td>@Model.Role</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

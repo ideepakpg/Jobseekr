@@ -32,37 +32,47 @@ namespace Jobseekr.Controllers
             return View("LandingPage");
         }
 
-        // Action to handle employee login
-        public ActionResult Login(Login model)
+        // Action to handle employee and employer login
+        [HttpGet]
+        public ActionResult Login()
+        {
+            var model = new LoginCommon(); // Create an instance of the common login model
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginCommon model)
         {
             if (ModelState.IsValid)
             {
                 using (var dbContext = new JobseekrDBContext())
                 {
-                    var user = obj.logins.FirstOrDefault(u => u.Username == model.Username);
+                    var employee = dbContext.loginsofEmployees.FirstOrDefault(u => u.Username == model.Username);
+                    var employer = dbContext.loginsofEmployers.FirstOrDefault(u => u.Username == model.Username);
 
-                    if (user != null && user.Password == model.Password)
+
+                    if (employee != null && employee.Password == model.Password)
                     {
-                        Session["UserRole"] = user.Role;
-
-                        if (user.Role == "Employee")
-                        {
-                            Session["EmployeeId"] = user.Id;
-                            return RedirectToAction("AvailableJobs");
-                        }
-                        else if (user.Role == "Employer")
-                        {
-                            // Redirect to Employer page
-                            return RedirectToAction("WelcomePage");
-                        }
-                        else if (user.Role == "Admin")
-                        {
-                            // Redirect to Admin page
-                            return RedirectToAction("AdminPage");
-                        }
-                        //return RedirectToAction("WelcomePage");
-
+                        Session["UserRole"] = employee.Role;
+                        Session["EmployeeId"] = employee.Id;
+                        Session["EmployerId"] = null;
+                        return RedirectToAction("AvailableJobs");
                     }
+                    else if (employer != null && employer.Password == model.Password)
+                    {
+                        Session["UserRole"] = employer.Role;
+                        Session["EmployerId"] = employer.Id;
+                        Session["EmployeeId"] = null;
+                        return RedirectToAction("WelcomePage");
+                    }
+                    //else if (user.Role == "Admin")
+                    //{
+                    //    // Redirect to Admin page
+                    //    return RedirectToAction("AdminPage");
+                    //}
+                    //return RedirectToAction("WelcomePage");
+
+
                     else
                     {
                         ModelState.AddModelError("", "Invalid username or password.");
@@ -110,7 +120,7 @@ namespace Jobseekr.Controllers
                         MobileNumber = employeeRegistrations.MobileNumber
                     };
 
-                    var login = new Login
+                    var loginemployee = new LoginEmployee
                     {
                         Username = employeeRegistrations.Username,
                         Password = employeeRegistrations.Password,
@@ -130,7 +140,7 @@ namespace Jobseekr.Controllers
 
                     // Add and save the instances to their respective tables
                     dbContext.employeeRegistrations.Add(registration);
-                    dbContext.logins.Add(login);
+                    dbContext.loginsofEmployees.Add(loginemployee);
                     dbContext.employeeLoginsforProfile.Add(employeeLogin);
                     dbContext.SaveChanges();
                 }
@@ -171,8 +181,25 @@ namespace Jobseekr.Controllers
                     dbContext.employerRegistrations.Add(registration);
                     dbContext.SaveChanges();
 
+                    // instance for store employer details to the EmployerLogin table
+                    var employerLogin = new EmployerLogin
+                    {
+                        FirstName = employerRegistration.FirstName,
+                        LastName = employerRegistration.LastName,
+                        EmailId = employerRegistration.EmailId,
+                        MobileNumber = employerRegistration.MobileNumber,
+                        Username = employerRegistration.Username,
+                        Password = employerRegistration.Password,
+                        Role = "Employer"
+                    };
+
+                    // Add the login information to the EmployerLogin table
+                    dbContext.employerLoginsforProfile.Add(employerLogin);
+                    dbContext.SaveChanges();
+
+
                     // Create an instance for the login
-                    var login = new Login
+                    var loginemployer = new LoginEmployer
                     {
                         Username = employerRegistration.Username,
                         Password = employerRegistration.Password,
@@ -180,8 +207,10 @@ namespace Jobseekr.Controllers
                     };
 
                     // Add the login information to the EmployeeLogin table
-                    dbContext.logins.Add(login);
+                    dbContext.loginsofEmployers.Add(loginemployer);
                     dbContext.SaveChanges();
+
+
                 }
 
                 return RedirectToAction("RegistrationSuccess");
@@ -419,6 +448,39 @@ namespace Jobseekr.Controllers
                 return View(jobApplications);
             }
         }
+
+
+        public ActionResult EmployerProfile()
+        {
+            if (Session["UserRole"] == null || (string)Session["UserRole"] != "Employer")
+            {
+                return RedirectToAction("Login", "Jobseekr");
+            }
+
+            int employerId;
+            if (Session["EmployerId"] != null)
+            {
+                employerId = (int)Session["EmployerId"];
+            }
+            else
+            {
+                return RedirectToAction("Login", "Jobseekr");
+            }
+
+            using (var db = new JobseekrDBContext())
+            {
+                var employer = db.employerLoginsforProfile.FirstOrDefault(e => e.Id == employerId);
+
+                if (employer == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(employer);
+            }
+        }
+
+
 
 
 

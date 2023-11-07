@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Jobseekr.Models
 {
-    [Table("Login")]
-    public class Login     //this model class for both employee and employer to login
+    [Table("LoginEmployee")]
+    public class LoginEmployee     //this model class is for only employees to login
     {
         [Key]
         public int Id { get; set; }
