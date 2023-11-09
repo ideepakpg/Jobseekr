@@ -14,5 +14,6 @@ namespace Jobseekr.Models
         public DbSet<EmployerRegistration> employerRegistrations { get; set; }
         public DbSet<EmployeeLogin> employeeLoginsforProfile { get; set; }
         public DbSet<EmployerLogin> employerLoginsforProfile { get; set; }
+        public DbSet<Review> reviews { get; set; }
     }
 }
