@@ -1,0 +1,48 @@
+﻿@model Jobseekr.Models.JobListing
+
+
+<div class="container mt-5">
+    <h2>Review Job</h2>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">@Model.JobTitle</h5>
+            <p class="card-text">@Model.Description</p>
+            <p class="card-text">Location: @Model.Location</p>
+            <p class="card-text">Salary: $@Model.Salary</p>
+            <p class="card-text">Posted Date: @Model.PostedDate.ToShortDateString()</p>
+
+            @using (Html.BeginForm("ReviewJob", "Jobseekr", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="Rating">Rating:</label>
+                    <select class="form-control" id="Rating" name="Rating">
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Comment">Comment:</label>
+                    <textarea class="form-control" id="Comment" name="Comment" rows="3"></textarea>
+                </div>
+
+                <input type="hidden" name="JobId" value="@Model.JobId" />
+
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            }
+        </div>
+    </div>
+</div>
