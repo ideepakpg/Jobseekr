@@ -143,6 +143,7 @@
     <Compile Include="Models\LoginCommon.cs" />
     <Compile Include="Models\LoginEmployee.cs" />
     <Compile Include="Models\LoginEmployer.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +216,8 @@
     <Content Include="Views\Jobseekr\EmployerRegistration.cshtml" />
     <Content Include="Views\Jobseekr\EmployeeProfile.cshtml" />
     <Content Include="Views\Jobseekr\EmployerProfile.cshtml" />
+    <Content Include="Views\Jobseekr\ReviewJob.cshtml" />
+    <Content Include="Views\Jobseekr\ReviewSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

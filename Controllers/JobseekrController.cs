@@ -70,7 +70,6 @@ namespace Jobseekr.Controllers
                     //    // Redirect to Admin page
                     //    return RedirectToAction("AdminPage");
                     //}
-                    //return RedirectToAction("WelcomePage");
 
 
                     else
@@ -452,11 +451,14 @@ namespace Jobseekr.Controllers
 
         public ActionResult EmployerProfile()
         {
+            // Check if the user is logged in as an employer
             if (Session["UserRole"] == null || (string)Session["UserRole"] != "Employer")
             {
+                // Redirect to the login page or handle the unauthorized access case
                 return RedirectToAction("Login", "Jobseekr");
             }
 
+            // get employer's ID from the session
             int employerId;
             if (Session["EmployerId"] != null)
             {
@@ -467,6 +469,7 @@ namespace Jobseekr.Controllers
                 return RedirectToAction("Login", "Jobseekr");
             }
 
+            // Get the employee details from the database table (EmployerLogin) to display employer profile
             using (var db = new JobseekrDBContext())
             {
                 var employer = db.employerLoginsforProfile.FirstOrDefault(e => e.Id == employerId);
@@ -588,7 +591,7 @@ namespace Jobseekr.Controllers
                 return RedirectToAction("Login", "Jobseekr");
             }
 
-            // Retrieve the employee's ID from the session
+            // get employee's ID from the session
             int employeeId;
             if (Session["EmployeeId"] != null)
             {
@@ -600,7 +603,7 @@ namespace Jobseekr.Controllers
                 return RedirectToAction("Login", "Jobseekr"); // Redirect to the login page
             }
 
-            // Get the employee details from the database
+            // Get the employee details from the database table (EmployeeLogin) to display employee profile
             using (var db = new JobseekrDBContext())
             {
                 var employee = db.employeeLoginsforProfile.FirstOrDefault(e => e.Id == employeeId);
@@ -608,12 +611,44 @@ namespace Jobseekr.Controllers
                 if (employee == null)
                 {
                     // Handle the case where the employee ID is not found in the database
-                    return HttpNotFound(); // Return a 404 Not Found status
+                    return HttpNotFound(); // show an error  
                 }
 
                 return View(employee);
             }
         }
+
+
+        public ActionResult ReviewJob(int jobId)
+        {
+            // get the jobs you want to review
+            JobListing jobToReview = obj.jobListings.Find(jobId);
+
+            if (jobToReview == null)
+            {
+                return HttpNotFound(); // 404
+            }
+
+            return View(jobToReview);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ReviewJob(Review review)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save the review and ratings to the database
+                obj.reviews.Add(review);
+                obj.SaveChanges();
+
+                ViewBag.Message = "Thank you for your review!";
+                return View("ReviewSuccess");
+            }
+
+            return View(review);
+        }
+
 
 
         // job employee aka seeker section starts here

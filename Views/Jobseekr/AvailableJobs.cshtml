@@ -54,9 +54,11 @@
                             <td>@jobListing.Salary.ToString("N0")</td>
                             <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
                             @*Apply button*@
-                            <td>
-                                @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn btn-primary" })
-                            </td>                      
+                        <td>
+                            @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn btn-primary" })
+                            @* Review and Rating button *@
+                            <a href="@Url.Action("ReviewJob", "Jobseekr", new { jobId = jobListing.JobId })" class="btn btn-info">Review & Rate</a>
+                        </td>                      
                         </tr>
                     }
                 </tbody>
