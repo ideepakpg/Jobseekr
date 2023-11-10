@@ -484,6 +484,72 @@ namespace Jobseekr.Controllers
         }
 
 
+        public ActionResult EditEmployerProfile(int Id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Get the employer profile by ID
+                var employerProfile = dbContext.employerLoginsforProfile.Find(Id);
+
+                if (employerProfile == null)
+                {
+                    return HttpNotFound(); // 404
+                }
+
+                return View(employerProfile);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditEmployerProfile(EmployerLogin employerProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    // Update EmployerLoginProfile
+                    dbContext.Entry(employerProfile).State = EntityState.Modified;
+
+                    // Update EmployerRegistration if it has the same Id of employer
+                    var employerRegistration = dbContext.employerRegistrations.FirstOrDefault(e => e.Id == employerProfile.Id);
+                    if (employerRegistration != null)
+                    {
+                        employerRegistration.FirstName = employerProfile.FirstName;
+                        employerRegistration.LastName = employerProfile.LastName;
+                        employerRegistration.EmailId = employerProfile.EmailId;
+                        employerRegistration.Username = employerProfile.Username;
+                        employerRegistration.Password = employerProfile.Password;
+                        employerRegistration.MobileNumber = employerProfile.MobileNumber;
+                    }
+
+                    // Update LoginEmployer if it has the same Id of employer
+                    var loginEmployer = dbContext.loginsofEmployers.FirstOrDefault(e => e.Id == employerProfile.Id);
+                    if (loginEmployer != null)
+                    {
+                        loginEmployer.Username = employerProfile.Username;
+                        loginEmployer.Password = employerProfile.Password;
+                    }
+
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("EmployerProfile");
+            }
+
+            return View(employerProfile);
+        }
+
+
+
+        public ActionResult ViewEmployeeReviews(int? jobId)
+        {
+            // Get reviews for the specified job ID
+            var allReviews = obj.reviews.ToList();
+
+            return View(allReviews);
+        }
+
+
 
 
 
@@ -619,9 +685,86 @@ namespace Jobseekr.Controllers
         }
 
 
+        public ActionResult EditEmployeeProfile(int? Id)
+        {
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Get the employee profile by ID
+                var employeeProfile = dbContext.employeeLoginsforProfile.Find(Id);
+
+                if (employeeProfile == null)
+                {
+                    return HttpNotFound(); // 404
+                }
+
+                return View(employeeProfile);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditEmployeeProfile(EmployeeLogin employeeProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    // Update EmployeeLoginProfile
+                    dbContext.Entry(employeeProfile).State = EntityState.Modified;
+
+                    // Update EmployeeRegistration if it has the same Id of employee
+                    var employeeRegistration = dbContext.employeeRegistrations.FirstOrDefault(e => e.Id == employeeProfile.Id);
+                    if (employeeRegistration != null)
+                    {
+                        employeeRegistration.FirstName = employeeProfile.FirstName;
+                        employeeRegistration.LastName = employeeProfile.LastName;
+                        employeeRegistration.EmailId = employeeProfile.EmailId;
+                        employeeRegistration.Username = employeeProfile.Username;
+                        employeeRegistration.Password = employeeProfile.Password;
+                        employeeRegistration.MobileNumber = employeeProfile.MobileNumber;
+
+                    }
+
+                    // Update LoginEmployee if it has the same Id of employee
+                    var loginEmployee = dbContext.loginsofEmployees.FirstOrDefault(e => e.Id == employeeProfile.Id);
+                    if (loginEmployee != null)
+                    {
+                        loginEmployee.Username = employeeProfile.Username;
+                        loginEmployee.Password = employeeProfile.Password;
+                    }
+
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("EmployeeProfile");
+            }
+
+            return View(employeeProfile);
+        }
+
+
+
+
         public ActionResult ReviewJob(int jobId)
         {
-            // get the jobs you want to review
+            // Check if the employee has already reviewed the job
+            int employeeId;
+            if (Session["EmployeeId"] != null && int.TryParse(Session["EmployeeId"].ToString(), out employeeId))
+            {
+                bool hasReviewed = obj.reviews.Any(r => r.JobId == jobId && r.EmployeeId == employeeId);
+
+                if (hasReviewed)
+                {
+                    ViewBag.Message = "You have already reviewed this job.";
+                    return View("ReviewError");
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Invalid session or employee ID.";
+                return View("ReviewError");
+            }
+
+            // get the job you want to review
             JobListing jobToReview = obj.jobListings.Find(jobId);
 
             if (jobToReview == null)
@@ -638,16 +781,36 @@ namespace Jobseekr.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Save the review and ratings to the database
-                obj.reviews.Add(review);
-                obj.SaveChanges();
+                // Check if the employee has already reviewed the job
+                int employeeId;
+                if (Session["EmployeeId"] != null && int.TryParse(Session["EmployeeId"].ToString(), out employeeId))
+                {
+                    bool hasReviewed = obj.reviews.Any(r => r.JobId == review.JobId && r.EmployeeId == employeeId);
 
-                ViewBag.Message = "Thank you for your review!";
-                return View("ReviewSuccess");
+                    if (hasReviewed)
+                    {
+                        ViewBag.Message = "You have already reviewed this job.";
+                        return View("ReviewError");
+                    }
+
+                    // Save the review and ratings to the database
+                    review.EmployeeId = employeeId; // Set the employee ID in the review
+                    obj.reviews.Add(review);
+                    obj.SaveChanges();
+
+                    ViewBag.Message = "Thank you for your review!";
+                    return View("ReviewSuccess");
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid session or employee ID.";
+                    return View("ReviewError");
+                }
             }
 
             return View(review);
         }
+
 
 
 

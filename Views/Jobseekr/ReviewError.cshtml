@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Review Error";
+}
+
+<h2>Review Error</h2>
+
+<script>
+    var message = "@ViewBag.Message";
+    alert(message);
+
+    window.location.href = "@Url.Action("AvailableJobs", "Jobseekr")";
+</script>

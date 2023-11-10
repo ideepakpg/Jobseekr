@@ -218,6 +218,10 @@
     <Content Include="Views\Jobseekr\EmployerProfile.cshtml" />
     <Content Include="Views\Jobseekr\ReviewJob.cshtml" />
     <Content Include="Views\Jobseekr\ReviewSuccess.cshtml" />
+    <Content Include="Views\Jobseekr\ReviewError.cshtml" />
+    <Content Include="Views\Jobseekr\ViewEmployeeReviews.cshtml" />
+    <Content Include="Views\Jobseekr\EditEmployerProfile.cshtml" />
+    <Content Include="Views\Jobseekr\EditEmployeeProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
