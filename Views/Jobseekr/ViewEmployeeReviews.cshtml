@@ -1,0 +1,29 @@
+﻿@model List<Jobseekr.Models.Review>
+
+@{
+    ViewBag.Title = "Employee Reviews";
+}
+
+<h2>Employee Reviews for Job</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee ID</th>
+            <th>Job ID</th>
+            <th>Rating</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td>@review.EmployeeId</td>
+                <td>@review.JobId</td>
+                <td>@review.Rating</td>
+                <td>@review.Comment</td>
+            </tr>
+        }
+    </tbody>
+</table>
