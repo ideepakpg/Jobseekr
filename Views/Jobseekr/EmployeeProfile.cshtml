@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-center">
-                    <a href="@Url.Action("EditProfile", "Employee")" class="btn btn-primary">Edit Profile</a>
+                    @Html.ActionLink("Edit Profile", "EditEmployeeProfile", new { id = Model.Id })
                 </div>
             </div>
         </div>
