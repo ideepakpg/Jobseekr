@@ -12,7 +12,6 @@
             <th>Applicant Name</th>
             <th>Applicant Email</th>
             <th>Resume</th>
-            <!-- Other columns as needed -->
         </tr>
     </thead>
     <tbody>
@@ -22,7 +21,11 @@
                 <td>@application.ApplicantName</td>
                 <td>@application.ApplicantEmail</td>
                 <td><a href="@application.Resume" target="_blank">Resume Link</a></td>
+                <td>
+                    @Html.ActionLink("Send Response", "SendJobApplicationResponse", new { applicationId = application.ApplicationId })
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
