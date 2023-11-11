@@ -1,0 +1,28 @@
+﻿@model Jobseekr.Models.JobApplication
+
+@{
+    ViewBag.Title = "Send Job Application Response";
+}
+
+<h2>Send Job Application Response</h2>
+
+<p>Applicant Name: @Model.ApplicantName</p>
+<p>Applicant Email: @Model.ApplicantEmail</p>
+<p>Resume: <a href="@Model.Resume" target="_blank">Resume Link</a></p>
+
+@using (Html.BeginForm("SubmitJobApplicationResponse", "Jobseekr", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.ApplicationId)
+
+    <div class="form-group">
+        <label for="response">Select Response:</label>
+        <select name="response" class="form-control">
+            <option value="Selected">Selected</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Response</button>
+}
+
+<a href="@Url.Action("ViewJobApplications", "Jobseekr")">Back to Job Applications</a>
