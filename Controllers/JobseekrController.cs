@@ -132,7 +132,7 @@ namespace Jobseekr.Controllers
                         LastName = employeeRegistrations.LastName,
                         EmailId = employeeRegistrations.EmailId,
                         Username = employeeRegistrations.Username,
-                        Password = employeeRegistrations.Password,
+                        //Password = employeeRegistrations.Password,
                         MobileNumber = employeeRegistrations.MobileNumber,
                         Role = "Employee"
                     };
@@ -188,7 +188,7 @@ namespace Jobseekr.Controllers
                         EmailId = employerRegistration.EmailId,
                         MobileNumber = employerRegistration.MobileNumber,
                         Username = employerRegistration.Username,
-                        Password = employerRegistration.Password,
+                        //Password = employerRegistration.Password,
                         Role = "Employer"
                     };
 
@@ -449,6 +449,51 @@ namespace Jobseekr.Controllers
         }
 
 
+        // Action to send response to job application
+        public ActionResult SendJobApplicationResponse(int applicationId)
+        {
+            // get job application from the database based on the applicationId
+            using (var dbContext = new JobseekrDBContext())
+            {
+                var jobApplication = dbContext.jobApplicationListings.Find(applicationId);
+
+                if (jobApplication == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Pass job application details to the view
+                return View(jobApplication);
+            }
+        }
+
+        // Action to handle the response submission
+        [HttpPost]
+        public ActionResult SubmitJobApplicationResponse(int applicationId, string response)
+        {
+            // Update the job application status based on the response
+            using (var dbContext = new JobseekrDBContext())
+            {
+                var jobApplication = dbContext.jobApplicationListings.Find(applicationId);
+
+                if (jobApplication == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Update the response status (table) in database
+                jobApplication.ResponseStatus = response;
+
+
+                dbContext.SaveChanges();
+            }
+
+            // Redirect to the job applications view
+            return RedirectToAction("ViewJobApplications");
+        }
+
+
+
         public ActionResult EmployerProfile()
         {
             // Check if the user is logged in as an employer
@@ -507,8 +552,26 @@ namespace Jobseekr.Controllers
             {
                 using (var dbContext = new JobseekrDBContext())
                 {
-                    // Update EmployerLoginProfile
-                    dbContext.Entry(employerProfile).State = EntityState.Modified;
+                    // Added the code to address the issue of the employer's status (role) getting deleted after updating profile details
+                    // in the EditEmployerProfile view, this code retrieves the original EmployerLogin object from the database, updates only the editable fields, and saves the changes. This ensures that the status (role) remains unchanged during the profile update operation.
+                    // Fixes issue #22
+
+                    // Retrieve the original employee object from the database
+                    var originalEmployer = dbContext.employerLoginsforProfile.Find(employerProfile.Id);
+
+                    if (originalEmployer == null)
+                    {
+                        return HttpNotFound(); // 404
+                    }
+
+                    // Update only the editable fields (enn vecha status role update cheyyaruth - update cheytha status role in EmployerProfile will get lost)
+                    originalEmployer.FirstName = employerProfile.FirstName;
+                    originalEmployer.LastName = employerProfile.LastName;
+                    originalEmployer.EmailId = employerProfile.EmailId;
+                    originalEmployer.Username = employerProfile.Username;
+                    originalEmployer.MobileNumber = employerProfile.MobileNumber;
+
+                    dbContext.SaveChanges();
 
                     // Update EmployerRegistration if it has the same Id of employer
                     var employerRegistration = dbContext.employerRegistrations.FirstOrDefault(e => e.Id == employerProfile.Id);
@@ -518,7 +581,7 @@ namespace Jobseekr.Controllers
                         employerRegistration.LastName = employerProfile.LastName;
                         employerRegistration.EmailId = employerProfile.EmailId;
                         employerRegistration.Username = employerProfile.Username;
-                        employerRegistration.Password = employerProfile.Password;
+                        //employerRegistration.Password = employerProfile.Password;
                         employerRegistration.MobileNumber = employerProfile.MobileNumber;
                     }
 
@@ -527,7 +590,7 @@ namespace Jobseekr.Controllers
                     if (loginEmployer != null)
                     {
                         loginEmployer.Username = employerProfile.Username;
-                        loginEmployer.Password = employerProfile.Password;
+                        //loginEmployer.Password = employerProfile.Password;
                     }
 
                     dbContext.SaveChanges();
@@ -708,8 +771,26 @@ namespace Jobseekr.Controllers
             {
                 using (var dbContext = new JobseekrDBContext())
                 {
-                    // Update EmployeeLoginProfile
-                    dbContext.Entry(employeeProfile).State = EntityState.Modified;
+                    // Added tje code to address the issue of the employee's status (role) getting deleted after updating profile details
+                    // in the EditEmployeeProfile view, this code retrieves the original EmployeeLogin object from the database, updates only the editable fields, and saves the changes. This ensures that the status (role) remains unchanged during the profile update operation.
+                    // Fixes issue #21
+
+                    // Retrieve the original employee object from the database
+                    var originalEmployee = dbContext.employeeLoginsforProfile.Find(employeeProfile.Id);
+
+                    if (originalEmployee == null)
+                    {
+                        return HttpNotFound(); // show error
+                    }
+
+                    // Update only the editable fields (enn vecha status role update cheyyaruth - update cheytha status role in EmployeeProfile will get lost)
+                    originalEmployee.FirstName = employeeProfile.FirstName;
+                    originalEmployee.LastName = employeeProfile.LastName;
+                    originalEmployee.EmailId = employeeProfile.EmailId;
+                    originalEmployee.Username = employeeProfile.Username;
+                    originalEmployee.MobileNumber = employeeProfile.MobileNumber;
+
+                    dbContext.SaveChanges();
 
                     // Update EmployeeRegistration if it has the same Id of employee
                     var employeeRegistration = dbContext.employeeRegistrations.FirstOrDefault(e => e.Id == employeeProfile.Id);
@@ -719,7 +800,7 @@ namespace Jobseekr.Controllers
                         employeeRegistration.LastName = employeeProfile.LastName;
                         employeeRegistration.EmailId = employeeProfile.EmailId;
                         employeeRegistration.Username = employeeProfile.Username;
-                        employeeRegistration.Password = employeeProfile.Password;
+                        //employeeRegistration.Password = employeeProfile.Password;
                         employeeRegistration.MobileNumber = employeeProfile.MobileNumber;
 
                     }
@@ -729,7 +810,7 @@ namespace Jobseekr.Controllers
                     if (loginEmployee != null)
                     {
                         loginEmployee.Username = employeeProfile.Username;
-                        loginEmployee.Password = employeeProfile.Password;
+                        //loginEmployee.Password = employeeProfile.Password;
                     }
 
                     dbContext.SaveChanges();
@@ -810,6 +891,7 @@ namespace Jobseekr.Controllers
 
             return View(review);
         }
+
 
 
 
