@@ -223,6 +223,7 @@
     <Content Include="Views\Jobseekr\EditEmployerProfile.cshtml" />
     <Content Include="Views\Jobseekr\EditEmployeeProfile.cshtml" />
     <Content Include="Views\Jobseekr\SendJobApplicationResponse.cshtml" />
+    <Content Include="Views\Jobseekr\ViewMyJobApplicationStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
