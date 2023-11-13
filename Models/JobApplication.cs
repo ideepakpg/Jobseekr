@@ -18,6 +18,8 @@ namespace Jobseekr.Models
         [Required(ErrorMessage = "Resume link is required")]
         public string Resume { get; set; }
         public string ResponseStatus { get; set; }
+        public string JobTitle { get; set; }
         public JobListing JobListing { get; set; }
+        public int EmployeeId { get; set; }
     }
 }
