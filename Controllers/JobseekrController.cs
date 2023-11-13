@@ -440,10 +440,13 @@ namespace Jobseekr.Controllers
         //to view job application applied by the employee
         public ActionResult ViewJobApplications()
         {
-            // Retrieve job applications from database
+            // get job applications from database
             using (var dbContext = new JobseekrDBContext())
             {
-                var jobApplications = dbContext.jobApplicationListings.ToList();
+                var jobApplications = dbContext.jobApplicationListings
+                    .Include(j => j.JobListing) // Load the associated job details
+                     .ToList();
+
                 return View(jobApplications);
             }
         }
@@ -631,8 +634,19 @@ namespace Jobseekr.Controllers
 
         public ActionResult ApplyJob(int jobId)
         {
-            JobApplication application = new JobApplication { JobId = jobId };
-            return View("SubmitApplication", application);
+            // Get the authenticated employee's Id from the session
+            int? employeeId = Session["EmployeeId"] as int?;
+
+            if (employeeId.HasValue)
+            {
+                JobApplication application = new JobApplication { JobId = jobId, EmployeeId = employeeId.Value };
+                return View("SubmitApplication", application);
+            }
+            else
+            {
+                // Redirect to login page or show an error message
+                return RedirectToAction("Login");
+            }
         }
 
 
@@ -641,15 +655,48 @@ namespace Jobseekr.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var dbContext = new JobseekrDBContext())
+                // Retrieve the employee ID from the session
+                int? employeeId = Session["EmployeeId"] as int?;
+
+                // Check if the employeeId is available
+                if (employeeId.HasValue)
                 {
-                    dbContext.jobApplicationListings.Add(application);
-                    dbContext.SaveChanges();
+                    // Assign the employeeId to the application before saving
+                    application.EmployeeId = employeeId.Value;
+
+                    // Fetch the associated JobListing to get the JobTitle
+                    using (var dbContext = new JobseekrDBContext())
+                    {
+                        var jobListing = dbContext.jobListings.Find(application.JobId);
+
+                        // Ensure the JobListing is found,using this mehtod because job title is not storing in databse table,by this method job title will be fetched from jobListing and will be stored in databse table.
+                        if (jobListing != null)
+                        {
+                            // Set the JobTitle property in the JobApplication
+                            application.JobTitle = jobListing.JobTitle;
+
+                            // to insert a default text in Response status ,after employer selects selected/rejected it will be removed and updated.
+                            application.ResponseStatus = "Pending";
+
+
+                            dbContext.jobApplicationListings.Add(application);
+                            dbContext.SaveChanges();
+
+
+                            return RedirectToAction("ApplicationConfirmation");
+                        }
+                        else
+                        {
+                            // Handle the case where the associated JobListing is not found
+                            ModelState.AddModelError("JobId", "Invalid JobId");
+                        }
+                    }
                 }
-
-                return RedirectToAction("ApplicationConfirmation");
+                else
+                {
+                    return RedirectToAction("Login");
+                }
             }
-
             return View(application);
         }
 
@@ -659,6 +706,30 @@ namespace Jobseekr.Controllers
         {
             return View();
         }
+
+
+        public ActionResult ViewMyJobApplicationStatus()
+        {
+            // Get the EmployeeId from the session
+            int? employeeId = Session["EmployeeId"] as int?;
+
+            if (!employeeId.HasValue)
+            {
+                return RedirectToAction("Login");
+            }
+
+            using (var dbContext = new JobseekrDBContext())
+            {
+                // Retrieve job applications submitted by the employee along with job details
+                var jobApplications = dbContext.jobApplicationListings
+                    .Include(j => j.JobListing) // Load the associated job details
+                    .Where(j => j.EmployeeId == employeeId.Value)
+                    .ToList();
+
+                return View(jobApplications);
+            }
+        }
+
 
         public ActionResult ViewCompanyProfiles()
         {
