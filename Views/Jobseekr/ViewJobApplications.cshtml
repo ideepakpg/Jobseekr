@@ -9,6 +9,8 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Job Id</th>
+            <th>Job Title</th>
             <th>Applicant Name</th>
             <th>Applicant Email</th>
             <th>Resume</th>
@@ -18,6 +20,8 @@
         @foreach (var application in Model)
         {
             <tr>
+                <td>@application.JobId</td>
+                <td>@(application.JobListing.JobTitle</td>
                 <td>@application.ApplicantName</td>
                 <td>@application.ApplicantEmail</td>
                 <td><a href="@application.Resume" target="_blank">Resume Link</a></td>
