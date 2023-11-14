@@ -49,6 +49,7 @@ namespace Jobseekr.Controllers
                 {
                     var employee = dbContext.loginsofEmployees.FirstOrDefault(u => u.Username == model.Username);
                     var employer = dbContext.loginsofEmployers.FirstOrDefault(u => u.Username == model.Username);
+                    var admin = dbContext.admin.FirstOrDefault(u => u.Username == model.Username);
 
 
                     if (employee != null && employee.Password == model.Password)
@@ -64,6 +65,14 @@ namespace Jobseekr.Controllers
                         Session["EmployerId"] = employer.Id;
                         Session["EmployeeId"] = null;
                         return RedirectToAction("WelcomePage");
+                    }
+                    else if (admin != null && admin.Password == model.Password)
+                    {
+                        Session["UserRole"] = admin.Role;
+                        Session["AdminId"] = admin.Id;
+                        Session["EmployeeId"] = null;
+                        Session["EmployerId"] = null;
+                        return RedirectToAction("AdminPage");
                     }
                     //else if (user.Role == "Admin")
                     //{
@@ -965,8 +974,87 @@ namespace Jobseekr.Controllers
 
 
 
-
-
         // job employee aka seeker section starts here
+
+
+
+
+        // admin section starts here
+
+        public ActionResult AdminPage()
+        {
+            return View();
+        }
+
+
+        public ActionResult ViewAllEmployees()
+        {
+            // Fetch all employees details from the database
+            List<EmployeeRegistration> employees = obj.employeeRegistrations.ToList();
+
+            // Pass the list of employees to the view
+            return View(employees);
+        }
+
+
+        public ActionResult ViewAllEmployers()
+        {
+            // Fetch all employers details from the database
+            List<EmployerRegistration> employers = obj.employerRegistrations.ToList();
+
+            // Pass the list of employers to the view
+            return View(employers);
+        }
+
+        public ActionResult ViewAllCompanyProfiles()
+        {
+            // Fetch all employers details from the database
+            List<CompanyProfile> companies = obj.companyProfiles.ToList();
+
+            // Pass the list of employers to the view
+            return View(companies);
+        }
+
+        public ActionResult ViewAllJobs()
+        {
+            // Fetch all employers details from the database
+            List<JobListing> jobs = obj.jobListings.ToList();
+
+            // Pass the list of employers to the view
+            return View(jobs);
+        }
+
+        public ActionResult ViewAllJobApplications()
+        {
+            // Fetch all employers details from the database
+            List<JobApplication> jobapplications = obj.jobApplicationListings.ToList();
+
+            // Pass the list of employers to the view
+            return View(jobapplications);
+        }
+
+        public ActionResult ViewAllEnquiries()
+        {
+            // Fetch all employers details from the database
+            List<Enquiry> enquiries = obj.enquiryListings.ToList();
+
+            // Pass the list of employers to the view
+            return View(enquiries);
+        }
+
+        public ActionResult ViewAllReviewsandRatings()
+        {
+            // Fetch all employers details from the database
+            List<Review> reviews = obj.reviews.ToList();
+
+            // Pass the list of employers to the view
+            return View(reviews);
+        }
+
+
+
+
+
+        // admin section ends here
     }
 }

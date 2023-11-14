@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AdminPage";
+}
+
+<h2>AdminPage</h2>
+
+
+<div>
+    <a href="@Url.Action("ViewAllEmployees", "Jobseekr")" class="btn btn-primary">Employees</a>
+    <a href="@Url.Action("ViewAllEmployers", "Jobseekr")" class="btn btn-success">Employers</a>
+    <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")" class="btn btn-dark">Companies</a>
+    <a href="@Url.Action("ViewAllJobs", "Jobseekr")" class="btn btn-dark">Jobs</a>
+    <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")" class="btn btn-secondary">Job Applications</a>
+    <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")" class="btn btn-danger">Enquiries</a>
+    <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")" class="btn btn-info">Review & Ratings</a>
+</div>
+
