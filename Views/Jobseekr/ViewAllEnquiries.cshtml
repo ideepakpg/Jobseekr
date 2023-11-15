@@ -8,6 +8,9 @@
 
 <table class="table">
     <tr>
+         <th>
+             @Html.DisplayNameFor(model => model.EnquiryId)
+         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -20,11 +23,17 @@
         <th>
             @Html.DisplayNameFor(model => model.Message)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reply)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnquiryId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
@@ -37,7 +46,58 @@
         <td>
             @Html.DisplayFor(modelItem => item.Message)
         </td>
+        <td>@Html.DisplayFor(modelItem => item.Reply)</td>
+            <td>
+                <div class="form-group">
+                    <label for="adminReply">Admin Reply:</label>
+                    <textarea class="form-control" id="adminReply-@item.EnquiryId" rows="3"></textarea>
+                </div>
+                <button type="button" class="btn btn-primary submit-reply" data-enquiryid="@item.EnquiryId">Submit Reply</button>
+            </td>
     </tr>
 }
 
 </table>
+
+
+// This script, executed when the DOM is fully loaded, handles the submission of admin replies through AJAX.
+// It listens for clicks on elements with the class "submit-reply", extracts necessary data, sends a POST request to the server-side action,
+<script>
+    $(document).ready(function () {
+        $(".submit-reply").on("click", function () {
+            var enquiryId = $(this).data("enquiryid");
+            var adminReply = $("#adminReply-" + enquiryId).val();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ViewAllEnquiries", "Jobseekr")",
+                data: {
+                    enquiryId: enquiryId,
+                    adminReply: adminReply
+                },
+                success: function (data) {
+                    // Handle success
+                    if (data.success) {
+                        // Show success alert
+                        $("#success-alert").fadeIn(500);
+                        setTimeout(function () {
+                            $("#success-alert").fadeOut(500);
+                        }, 1000);
+                    } else {
+                        // Show error alert
+                        $("#error-alert").fadeIn(500);
+                        setTimeout(function () {
+                            $("#error-alert").fadeOut(500);
+                        }, 1000);
+                    }
+                },
+                error: function () {
+                    // Handle error
+                    $("#error-alert").fadeIn(500, function () {
+                        $(this).fadeOut(1000);
+                    });
+                }
+            });
+        });
+    });
+</script>

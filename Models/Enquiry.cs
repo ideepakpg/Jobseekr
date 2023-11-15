@@ -16,6 +16,7 @@ namespace Jobseekr.Models
         public string Subject { get; set; }
         [Required(ErrorMessage = "Message is required")]
         public string Message { get; set; }
+        public string Reply { get; set; }
 
     }
 }
