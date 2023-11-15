@@ -789,6 +789,15 @@ namespace Jobseekr.Controllers
             return Json(new { success = false });
         }
 
+        public ActionResult EmployeeInbox()
+        {
+            // Fetch all enquiries from the database(admin replies too)
+            List<Enquiry> enquiries = obj.enquiryListings.ToList();
+
+            return View(enquiries);
+        }
+
+
 
         // Action to display the employee profile
         public ActionResult EmployeeProfile()
@@ -1024,6 +1033,20 @@ namespace Jobseekr.Controllers
             return View(jobs);
         }
 
+        public ActionResult DeleteJob(int jobId)
+        {
+            var jobToDelete = obj.jobListings.FirstOrDefault(j => j.JobId == jobId);
+
+            if (jobToDelete != null)
+            {
+                obj.jobListings.Remove(jobToDelete);
+                obj.SaveChanges();
+            }
+
+            // Redirect back to the view
+            return RedirectToAction("ViewAllJobs");
+        }
+
         public ActionResult ViewAllJobApplications()
         {
             // Fetch all employers details from the database
@@ -1041,6 +1064,22 @@ namespace Jobseekr.Controllers
             // Pass the list of employers to the view
             return View(enquiries);
         }
+
+        [HttpPost]
+        public ActionResult ViewAllEnquiries(int enquiryId, string adminReply)
+        {
+            Enquiry enquiry = obj.enquiryListings.Find(enquiryId);
+
+            if (enquiry != null)
+            {
+                enquiry.Reply = adminReply;
+                obj.SaveChanges();
+            }
+
+            return Json(new { success = true });
+        }
+
+
 
         public ActionResult ViewAllReviewsandRatings()
         {
