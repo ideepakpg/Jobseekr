@@ -17,6 +17,8 @@ namespace Jobseekr.Models
         [Required(ErrorMessage = "Message is required")]
         public string Message { get; set; }
         public string Reply { get; set; }
+        // to store the Id of currently logged in employee who submits enquiry
+        public int? EmployeeId { get; set; }
 
     }
 }
