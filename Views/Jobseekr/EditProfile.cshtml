@@ -4,10 +4,8 @@
 {
     @Html.AntiForgeryToken()
     <!-- Form fields for editing the company profile -->
-    <div class="form-group">
-        @Html.LabelFor(model => model.CompanyId)
-        @Html.EditorFor(model => model.CompanyId, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
+    <!-- Add a hidden field for CompanyId (because it shouldn't be visible to the employer)-->
+    @Html.HiddenFor(model => model.CompanyId)
     <div class="form-group">
         @Html.LabelFor(model => model.CompanyName)
         @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
@@ -32,6 +30,10 @@
         @Html.LabelFor(model => model.Website)
         @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
     </div>
+
+    <!-- Add a hidden field for EmployerId (because it shouldn't be visible to employer)-->
+    @Html.HiddenFor(model => model.EmployerId)
+
     <!-- Add other fields here -->
     <button type="submit" class="btn btn-primary">Save</button>
 }

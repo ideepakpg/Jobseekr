@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Jobseekr.Models.CompanyProfile>
+
+@{
+    ViewBag.Title = "All Company Profiles";
+}
+
+<h2>All Company Profiles</h2>
+
+<div class="container">
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var profile in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">@profile.CompanyName</h5>
+                            <p class="card-text">@profile.Description</p>
+                            <p class="card-text"><strong>Location:</strong> @profile.Location</p>
+                            <p class="card-text"><strong>Founded:</strong> @profile.Founded</p>
+                            <p class="card-text"><strong>Contact:</strong> @profile.Contact</p>
+                            <p class="card-text"><strong>Website:</strong> @profile.Website</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>No company profiles found.</p>
+        }
+    </div>
+</div>

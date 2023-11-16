@@ -38,8 +38,11 @@
                     <div class="invalid-feedback">
                         Please enter your message.
                     </div>
-                </div>
-
+              </div>
+              
+                <!-- Add a hidden field for EmployeeId (because it shouldn't be visible to employee)-->
+                  @Html.HiddenFor(model => model.EmployeeId)
+                
                 <button type="submit" class="btn btn-primary">Submit Enquiry</button>
             }
         </div>

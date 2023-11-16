@@ -35,6 +35,10 @@
             @Html.LabelFor(model => model.Website)
             @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+
+        <!-- Add a hidden field for EmployerId (because it shouldn't be visible to employer)-->
+        @Html.HiddenFor(model => model.EmployerId)
+
         <!-- Add other fields here -->
         <button type="submit" class="btn btn-primary">Create new Profile</button>
     }

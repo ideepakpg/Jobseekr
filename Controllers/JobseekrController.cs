@@ -257,34 +257,65 @@ namespace Jobseekr.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var dbContext = new JobseekrDBContext())
-                {
-                    // Add the job listing to the database
-                    dbContext.jobListings.Add(jobListings);
-                    dbContext.SaveChanges();
-                }
+                // get the currently logged-in employer's ID
+                int? employerId = Session["EmployerId"] as int?;
 
-                return RedirectToAction("WelcomePage"); // Redirect to the WelcomePage action
+                if (employerId.HasValue)
+                {
+                    // Set the employer ID in the job listing object
+                    jobListings.EmployerId = employerId.Value;
+
+                    // Save the job listing to the database
+                    using (var dbContext = new JobseekrDBContext())
+                    {
+                        // Add the job listing to the database
+                        dbContext.jobListings.Add(jobListings);
+                        dbContext.SaveChanges();
+                    }
+
+                    return RedirectToAction("WelcomePage");
+                }
+                else
+                {
+                    // Handle the case where EmployerId is not present in the session
+                    return RedirectToAction("Login");
+                }
             }
 
             return View(jobListings);
         }
 
+
         public ActionResult Edit(int id)
         {
             using (var dbContext = new JobseekrDBContext())
             {
-                // Retrieve the job listing by ID
+                // get the job listing by ID
                 var jobListing = dbContext.jobListings.Find(id);
 
                 if (jobListing == null)
                 {
-                    return HttpNotFound(); // or return an appropriate error view
+                    return HttpNotFound();
                 }
 
-                return View(jobListing);
+                // Access the currently logged-in employer's ID
+                int? employerId = Session["EmployerId"] as int?;
+
+                if (employerId.HasValue)
+                {
+                    // Set the employer ID in the job listing object
+                    jobListing.EmployerId = employerId.Value;
+
+                    return View(jobListing);
+                }
+                else
+                {
+                    // Handle the case where EmployerId is not present in the session
+                    return RedirectToAction("Login");
+                }
             }
         }
+
 
         [HttpPost]
         public ActionResult Edit(JobListing jobListing)
@@ -366,27 +397,56 @@ namespace Jobseekr.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Add the new company profile to the database
-                obj.companyProfiles.Add(newProfile);
-                obj.SaveChanges();
+                // Access the currently logged-in employer's ID
+                int? employerId = Session["EmployerId"] as int?;
 
-                TempData["Message"] = "Company profile created successfully"; // Use TempData for displaying a success message
+                if (employerId.HasValue)
+                {
+                    // Set the employer ID in the company profile object
+                    newProfile.EmployerId = employerId.Value;
 
-                return RedirectToAction("ViewProfile");
+                    // Add the new company profile to the database
+                    obj.companyProfiles.Add(newProfile);
+                    obj.SaveChanges();
+
+                    TempData["Message"] = "Company profile created successfully"; // Use TempData for displaying a success message
+
+                    return RedirectToAction("ViewProfile");
+                }
+                else
+                {
+                    // Handle the case where EmployerId is not present in the session
+                    return RedirectToAction("Login");
+                }
             }
 
             return View(newProfile);
         }
 
 
-        // Action to view the company profile
+
+        // Action to view the company profile (the logged in employer posted companies only)
         public ActionResult ViewProfile()
         {
-            // Fetch all company profiles from the database
-            List<CompanyProfile> profiles = obj.companyProfiles.ToList();
+            // Access the currently logged-in employer's ID
+            int? employerId = Session["EmployerId"] as int?;
 
-            return View(profiles);
+            if (employerId.HasValue)
+            {
+                // Fetch only the company profiles submitted by the logged-in employer (by id)
+                List<CompanyProfile> profiles = obj.companyProfiles
+                    .Where(p => p.EmployerId == employerId.Value)
+                    .ToList();
+
+                return View(profiles);
+            }
+            else
+            {
+                // Handle the case where EmployerId is not present in the session
+                return RedirectToAction("Login");
+            }
         }
+
 
 
         // Action to edit the company profile
@@ -427,7 +487,6 @@ namespace Jobseekr.Controllers
                     // Save changes to the database
                     obj.SaveChanges();
 
-                    TempData["Message"] = "Profile updated successfully"; // Use TempData for displaying a success message
                 }
 
                 return RedirectToAction("ViewProfile");
@@ -435,6 +494,16 @@ namespace Jobseekr.Controllers
 
             return View(updatedProfile);
         }
+
+        // this action is to display all companies posted by every employers
+        public ActionResult AllCompanyProfiles()
+        {
+            // Fetch all company profiles from the database
+            List<CompanyProfile> profiles = obj.companyProfiles.ToList();
+
+            return View(profiles);
+        }
+
 
 
         [HttpGet]
@@ -779,23 +848,57 @@ namespace Jobseekr.Controllers
         {
             if (ModelState.IsValid)
             {
-                obj.enquiryListings.Add(enquiry);
-                obj.SaveChanges();
-                // Submission was successful
-                return Json(new { success = true });
+                // Access the currently logged-in employee's ID
+                int? employeeId = Session["EmployeeId"] as int?;
+
+                if (employeeId.HasValue)
+                {
+                    // Set the employee ID in the enquiry object
+                    enquiry.EmployeeId = employeeId.Value;
+
+                    // Save the enquiry to the database
+                    obj.enquiryListings.Add(enquiry);
+                    obj.SaveChanges();
+
+                    // Submission was successful
+                    return Json(new { success = true });
+                }
+                else
+                {
+                    // Handle the case where EmployeeId is not present in the session
+                    // (e.g., redirect to login or display an error message)
+                    return Json(new { success = false, error = "EmployeeId not found in session." });
+                }
             }
 
             // Submission failed
             return Json(new { success = false });
         }
 
+
+
+
         public ActionResult EmployeeInbox()
         {
-            // Fetch all enquiries from the database(admin replies too)
-            List<Enquiry> enquiries = obj.enquiryListings.ToList();
+            // Access the currently logged-in employee's ID
+            int? employeeId = Session["EmployeeId"] as int?;
 
-            return View(enquiries);
+            if (employeeId.HasValue)
+            {
+                // Fetch only the enquiries submitted by the logged-in employee (based on EmployeeId)
+                List<Enquiry> enquiries = obj.enquiryListings
+                    .Where(e => e.EmployeeId == employeeId.Value)
+                    .ToList();
+
+                return View(enquiries);
+            }
+            else
+            {
+                // Handle the case where EmployeeId is not present in the session
+                return RedirectToAction("Login");
+            }
         }
+
 
 
 
