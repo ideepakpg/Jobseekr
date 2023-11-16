@@ -234,6 +234,7 @@
     <Content Include="Views\Jobseekr\ViewAllEnquiries.cshtml" />
     <Content Include="Views\Jobseekr\ViewAllReviewsandRatings.cshtml" />
     <Content Include="Views\Jobseekr\EmployeeInbox.cshtml" />
+    <Content Include="Views\Jobseekr\AllCompanyProfiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
