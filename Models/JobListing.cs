@@ -19,5 +19,7 @@ namespace Jobseekr.Models
         public decimal Salary { get; set; }
         [Required(ErrorMessage = "Job Posted Date is required")]
         public DateTime PostedDate { get; set; }
+        // to store Id of employer who posted the job
+        public int? EmployerId { get; set; }
     }
 }
