@@ -20,5 +20,7 @@ namespace Jobseekr.Models
         public long Contact { get; set; }
         [Required(ErrorMessage = "Website is required")]
         public string Website { get; set; }
+        // to store the Id of currently logged in employer who added company
+        public int? EmployerId { get; set; }
     }
 }
