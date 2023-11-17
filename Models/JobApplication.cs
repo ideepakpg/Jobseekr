@@ -21,5 +21,6 @@ namespace Jobseekr.Models
         public string JobTitle { get; set; }
         public JobListing JobListing { get; set; }
         public int EmployeeId { get; set; }
+        public int? EmployerId { get; set; }
     }
 }

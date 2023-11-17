@@ -12,5 +12,6 @@ namespace Jobseekr.Models
         public int Rating { get; set; }
         public string Comment { get; set; }
         public int EmployeeId { get; set; }
+        public int? EmployerId { get; set; }
     }
 }
