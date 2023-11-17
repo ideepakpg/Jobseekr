@@ -515,19 +515,32 @@ namespace Jobseekr.Controllers
         }
 
 
-        //to view job application applied by the employee
+        //to view job application applied by the employee . Fixes #32
         public ActionResult ViewJobApplications()
         {
-            // get job applications from database
-            using (var dbContext = new JobseekrDBContext())
+            // Check if the employer is logged in
+            int employerId;
+            if (Session["EmployerId"] != null && int.TryParse(Session["EmployerId"].ToString(), out employerId))
             {
-                var jobApplications = dbContext.jobApplicationListings
-                    .Include(j => j.JobListing) // Load the associated job details
-                     .ToList();
+                // Get the list of job IDs posted by the employer
+                var employerJobIds = obj.jobListings.Where(j => j.EmployerId == employerId).Select(j => j.JobId).ToList();
+
+                // Get job applications for the employer's posted jobs
+                var jobApplications = obj.jobApplicationListings
+                    .Include(ja => ja.JobListing) // Load the associated job details
+                    .Where(ja => employerJobIds.Contains(ja.JobId))
+                    .ToList();
 
                 return View(jobApplications);
             }
+            else
+            {
+                ViewBag.Message = "Invalid session or employer ID.";
+                return View("Error");
+            }
         }
+
+
 
 
         // Action to send response to job application
@@ -684,13 +697,28 @@ namespace Jobseekr.Controllers
         }
 
 
-
+        // to view reviews of employees for the jobs employers posted . Fixes #31
         public ActionResult ViewEmployeeReviews(int? jobId)
         {
-            // Get reviews for the specified job ID
-            var allReviews = obj.reviews.ToList();
+            // Check if the employer is logged in
+            int employerId;
+            if (Session["EmployerId"] != null && int.TryParse(Session["EmployerId"].ToString(), out employerId))
+            {
+                // Get the list of job IDs posted by the employer
+                var employerJobIds = obj.jobListings.Where(j => j.EmployerId == employerId).Select(j => j.JobId).ToList();
 
-            return View(allReviews);
+                // Get reviews for the specified job ID and employer's posted jobs
+                var jobReviews = obj.reviews
+                    .Where(r => employerJobIds.Contains(r.JobId))
+                    .ToList();
+
+                return View(jobReviews);
+            }
+            else
+            {
+                ViewBag.Message = "Invalid session or employer ID.";
+                return View("Error");
+            }
         }
 
 
@@ -718,16 +746,36 @@ namespace Jobseekr.Controllers
             if (employeeId.HasValue)
             {
                 JobApplication application = new JobApplication { JobId = jobId, EmployeeId = employeeId.Value };
-                return View("SubmitApplication", application);
+
+                // Fetch the associated JobListing to get the EmployerId
+                using (var dbContext = new JobseekrDBContext())
+                {
+                    var jobListing = dbContext.jobListings.Find(jobId);
+
+                    // Ensure the JobListing is found
+                    if (jobListing != null)
+                    {
+                        // Set the EmployerId property in the JobApplication
+                        application.EmployerId = jobListing.EmployerId;
+
+                        return View("SubmitApplication", application);
+                    }
+                    else
+                    {
+                        // handle the case where the associated JobListing is not found
+                        return RedirectToAction("Error");
+                    }
+                }
             }
             else
             {
-                // Redirect to login page or show an error message
+                // Redirect to login page
                 return RedirectToAction("Login");
             }
         }
 
 
+        // this action is to submit the job application by the employees
         [HttpPost]
         public ActionResult SubmitApplication(JobApplication application)
         {
@@ -739,34 +787,33 @@ namespace Jobseekr.Controllers
                 // Check if the employeeId is available
                 if (employeeId.HasValue)
                 {
-                    // Assign the employeeId to the application before saving
-                    application.EmployeeId = employeeId.Value;
-
-                    // Fetch the associated JobListing to get the JobTitle
+                    // Fetch the associated JobListing to get the EmployerId
                     using (var dbContext = new JobseekrDBContext())
                     {
                         var jobListing = dbContext.jobListings.Find(application.JobId);
 
-                        // Ensure the JobListing is found,using this mehtod because job title is not storing in databse table,by this method job title will be fetched from jobListing and will be stored in databse table.
+                        // Ensure the JobListing is found
                         if (jobListing != null)
                         {
+                            // Set the EmployerId and EmployeeId properties in the JobApplication to store in database
+                            application.EmployerId = jobListing.EmployerId;
+                            application.EmployeeId = employeeId.Value;
+
                             // Set the JobTitle property in the JobApplication
                             application.JobTitle = jobListing.JobTitle;
 
-                            // to insert a default text in Response status ,after employer selects selected/rejected it will be removed and updated.
+                            // Set a default text in ResponseStatus; after the employer selects selected/rejected, it will be removed and updated
                             application.ResponseStatus = "Pending";
-
 
                             dbContext.jobApplicationListings.Add(application);
                             dbContext.SaveChanges();
-
 
                             return RedirectToAction("ApplicationConfirmation");
                         }
                         else
                         {
                             // Handle the case where the associated JobListing is not found
-                            ModelState.AddModelError("JobId", "Invalid JobId");
+                            return RedirectToAction("Error");
                         }
                     }
                 }
@@ -1066,8 +1113,17 @@ namespace Jobseekr.Controllers
                         return View("ReviewError");
                     }
 
+                    // Get the job you want to review
+                    JobListing jobToReview = obj.jobListings.Find(review.JobId);
+
+                    if (jobToReview == null)
+                    {
+                        return HttpNotFound(); // 404
+                    }
+
                     // Save the review and ratings to the database
                     review.EmployeeId = employeeId; // Set the employee ID in the review
+                    review.EmployerId = jobToReview.EmployerId; // Set the employer ID in the review
                     obj.reviews.Add(review);
                     obj.SaveChanges();
 
@@ -1077,7 +1133,7 @@ namespace Jobseekr.Controllers
                 else
                 {
                     ViewBag.Message = "Invalid session or employee ID.";
-                    return View("ReviewError");
+                    return View("Error");
                 }
             }
 
@@ -1086,7 +1142,7 @@ namespace Jobseekr.Controllers
 
 
 
-        // job employee aka seeker section starts here
+        // job employee aka seeker section ends here
 
 
 
