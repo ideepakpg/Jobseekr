@@ -301,21 +301,18 @@ namespace Jobseekr.Controllers
                 // Access the currently logged-in employer's ID
                 int? employerId = Session["EmployerId"] as int?;
 
-                if (employerId.HasValue)
+                if (employerId.HasValue && employerId.Value == jobListing.EmployerId)
                 {
-                    // Set the employer ID in the job listing object
-                    jobListing.EmployerId = employerId.Value;
-
                     return View(jobListing);
                 }
                 else
                 {
-                    // Handle the case where EmployerId is not present in the session
-                    return RedirectToAction("Login");
+                    // Set a TempData to indicate unauthorized edit (to show an bootstrap alert message while an employer tries to edit a job that not posted by himself/herself). Fixes issue 36
+                    TempData["NotAuthorizedEdit"] = true;
+                    return RedirectToAction("WelcomePage"); // show an alert also
                 }
             }
         }
-
 
         [HttpPost]
         public ActionResult Edit(JobListing jobListing)
@@ -324,16 +321,28 @@ namespace Jobseekr.Controllers
             {
                 using (var dbContext = new JobseekrDBContext())
                 {
-                    dbContext.Entry(jobListing).State = EntityState.Modified;
-                    dbContext.SaveChanges();
+                    // Check if the logged-in employer is the owner of the job listing
+                    int? employerId = Session["EmployerId"] as int?;
+                    if (employerId.HasValue && employerId.Value == jobListing.EmployerId)
+                    {
+                        dbContext.Entry(jobListing).State = EntityState.Modified;
+                        dbContext.SaveChanges();
+                        return RedirectToAction("WelcomePage");
+                    }
+                    else
+                    {
+                        // Set a TempData to indicate unauthorized edit (to show an bootstrap alert message while an employer tries to edit a job that not posted by himself/herself). Fixes issue 36
+                        TempData["NotAuthorizedEdit"] = true;
+                        return RedirectToAction("WelcomePage");
+                    }
                 }
-
-                return RedirectToAction("WelcomePage");
             }
 
             return View(jobListing);
         }
 
+
+        // this action is to display details of jobs
         public ActionResult Details(int id)
         {
             using (var dbContext = new JobseekrDBContext())
@@ -343,12 +352,13 @@ namespace Jobseekr.Controllers
 
                 if (jobListing == null)
                 {
-                    return HttpNotFound(); // or return an appropriate error view
+                    return HttpNotFound();
                 }
 
                 return View(jobListing);
             }
         }
+
 
         public ActionResult Delete(int id)
         {
@@ -359,12 +369,25 @@ namespace Jobseekr.Controllers
 
                 if (jobListing == null)
                 {
-                    return HttpNotFound(); // error view
+                    return HttpNotFound();
                 }
 
-                return View(jobListing);
+                // Access the currently logged-in employer's ID
+                int? employerId = Session["EmployerId"] as int?;
+
+                if (employerId.HasValue && employerId.Value == jobListing.EmployerId)
+                {
+                    return View(jobListing);
+                }
+                else
+                {
+                    // Set a TempData to indicate unauthorized delete (to show an bootstrap alert message while an employer tries to delete a job that not posted by himself/herself). Fixes issue 36
+                    TempData["NotAuthorizedDelete"] = true;
+                    return RedirectToAction("WelcomePage");
+                }
             }
         }
+
 
         [HttpPost]
         public ActionResult DeleteConfirmed(int id)
@@ -374,15 +397,27 @@ namespace Jobseekr.Controllers
                 // Retrieve the job listing by ID
                 var jobListing = dbContext.jobListings.Find(id);
 
-                if (jobListing != null)
+                // Check if the logged-in employer is the owner of the job listing
+                int? employerId = Session["EmployerId"] as int?;
+                if (employerId.HasValue && employerId.Value == jobListing.EmployerId)
                 {
-                    dbContext.jobListings.Remove(jobListing);
-                    dbContext.SaveChanges();
-                }
+                    if (jobListing != null)
+                    {
+                        dbContext.jobListings.Remove(jobListing);
+                        dbContext.SaveChanges();
+                    }
 
-                return RedirectToAction("WelcomePage");
+                    return RedirectToAction("WelcomePage");
+                }
+                else
+                {
+                    // Set a TempData to indicate unauthorized delete (to show an bootstrap alert message while an employer tries to delete a job that not posted by himself/herself). Fixes issue 36
+                    TempData["NotAuthorizedDelete"] = true;
+                    return RedirectToAction("WelcomePage");
+                }
             }
         }
+
 
         // Company profile management
 
@@ -787,15 +822,26 @@ namespace Jobseekr.Controllers
                 // Check if the employeeId is available
                 if (employeeId.HasValue)
                 {
-                    // Fetch the associated JobListing to get the EmployerId
+                    // Check if the employee has already applied for the specified job
                     using (var dbContext = new JobseekrDBContext())
                     {
+                        bool hasApplied = dbContext.jobApplicationListings
+                            .Any(app => app.JobId == application.JobId && app.EmployeeId == employeeId);
+
+                        if (hasApplied)
+                        {
+                            // Set a TempData to indicate mutliple job applies (to show an bootstrap alert message when employee tries to apply for a job that he/she already applied). Fixes issue 34
+                            TempData["EnoughApply"] = true;
+                            return RedirectToAction("AvailableJobs");
+                        }
+
+                        // Fetch the associated JobListing to get the EmployerId
                         var jobListing = dbContext.jobListings.Find(application.JobId);
 
                         // Ensure the JobListing is found
                         if (jobListing != null)
                         {
-                            // Set the EmployerId and EmployeeId properties in the JobApplication to store in database
+                            // Set the EmployerId and EmployeeId properties in the JobApplication to store in the database
                             application.EmployerId = jobListing.EmployerId;
                             application.EmployeeId = employeeId.Value;
 
@@ -812,7 +858,6 @@ namespace Jobseekr.Controllers
                         }
                         else
                         {
-                            // Handle the case where the associated JobListing is not found
                             return RedirectToAction("Error");
                         }
                     }
@@ -822,8 +867,10 @@ namespace Jobseekr.Controllers
                     return RedirectToAction("Login");
                 }
             }
+
             return View(application);
         }
+
 
 
 
