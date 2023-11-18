@@ -1,71 +1,82 @@
 ﻿@model List<Jobseekr.Models.JobListing>
 
-    @{
-        ViewBag.Title = "Available Jobs";
-    }
-
-    <div class="container mt-5">
-        <div class="container mt-5">
-            <div class="text-center">
-                @* My Profile button - Redirects to EmployeeProfile *@
-                <a href="@Url.Action("EmployeeProfile", "Jobseekr")" class="btn btn-success">My Profile</a>
-                @*Company profile button*@
-                <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")" class="btn btn-primary">Company Profiles</a>
-                @*Enquiry button*@
-                <a href="@Url.Action("Enquiry", "Jobseekr")" class="btn btn-primary">Enquiry</a>
-                @*Inbox button*@
-                <a href="@Url.Action("EmployeeInbox", "Jobseekr")" class="btn btn-info">Inbox</a>
-                @*Job applications view button*@
-                <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")" class="btn btn-primary">Application status</a>
-                @*Logout button*@
-                <a href="@Url.Action("Logout", "Jobseekr")" class="btn btn-danger">Logout</a>
-            </div>
+<!-- Display a Bootstrap alert when employee tries to apply for a job that he/she already applied -->
+@if (TempData["EnoughApply"] != null && (bool)TempData["EnoughApply"])
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>
+            You have already applied for this job.
         </div>
-        <h2 class="text-center">Available Jobs</h2>
-        @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
-        {
-            <div class="form-group">
-                @Html.Label("Job Name")
-                @Html.TextBox("jobName", null, new { @class = "form-control" })
-            </div>
+    </div>
+}
 
-            <div class="form-group">
-                @Html.Label("City Name")
-                @Html.TextBox("cityName", null, new { @class = "form-control" })
-            </div>
+@{
+    ViewBag.Title = "Available Jobs";
+}
 
-            <button type="submit" class="btn btn-primary">Find Jobs</button>
-        }
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
+<div class="container mt-5">
+    <div class="container mt-5">
+        <div class="text-center">
+            @* My Profile button - Redirects to EmployeeProfile *@
+            <a href="@Url.Action("EmployeeProfile", "Jobseekr")" class="btn btn-success">My Profile</a>
+            @*Company profile button*@
+            <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")" class="btn btn-primary">Company Profiles</a>
+            @*Enquiry button*@
+            <a href="@Url.Action("Enquiry", "Jobseekr")" class="btn btn-primary">Enquiry</a>
+            @*Inbox button*@
+            <a href="@Url.Action("EmployeeInbox", "Jobseekr")" class="btn btn-info">Inbox</a>
+            @*Job applications view button*@
+            <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")" class="btn btn-primary">Application status</a>
+            @*Logout button*@
+            <a href="@Url.Action("Logout", "Jobseekr")" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+    <h2 class="text-center">Available Jobs</h2>
+    @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
+    {
+        <div class="form-group">
+            @Html.Label("Job Name")
+            @Html.TextBox("jobName", null, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("City Name")
+            @Html.TextBox("cityName", null, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Find Jobs</button>
+    }
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Salary</th>
+                    <th>Posted Date</th>
+                    <th>Apply</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var jobListing in Model)
+                {
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>Salary</th>
-                        <th>Posted Date</th>
-                        <th>Apply</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var jobListing in Model)
-                    {
-                        <tr>
-                            <td>@jobListing.JobTitle</td>
-                            <td>@jobListing.Description</td>
-                            <td>@jobListing.Location</td>
-                            <td>@jobListing.Salary.ToString("N0")</td>
-                            <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
-                            @*Apply button*@
+                        <td>@jobListing.JobTitle</td>
+                        <td>@jobListing.Description</td>
+                        <td>@jobListing.Location</td>
+                        <td>@jobListing.Salary.ToString("N0")</td>
+                        <td>@jobListing.PostedDate.ToString("dd-MM-yyyy")</td>
+                        @*Apply button*@
                         <td>
                             @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn btn-primary" })
                             @* Review and Rating button *@
                             <a href="@Url.Action("ReviewJob", "Jobseekr", new { jobId = jobListing.JobId })" class="btn btn-info">Review & Rate</a>
-                        </td>                      
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
+</div>
