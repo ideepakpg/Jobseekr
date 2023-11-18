@@ -1,5 +1,27 @@
 ﻿@model IEnumerable<Jobseekr.Models.JobListing>
 
+<!-- Display a Bootstrap alert when employer who didn't posted the job tries to edit -->
+@if (TempData["NotAuthorizedEdit"] != null && (bool)TempData["NotAuthorizedEdit"])
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>
+            You are not authorized to edit this job.
+        </div>
+    </div>
+}
+
+<!-- Display a Bootstrap alert when employer who didn't posted the job tries to delete -->
+@if (TempData["NotAuthorizedDelete"] != null && (bool)TempData["NotAuthorizedDelete"])
+{
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill" /></svg>
+        <div>
+            You are not authorized to delete this job.
+        </div>
+    </div>
+}
+
 @{
     ViewBag.Title = "LatestJobs";
 }
