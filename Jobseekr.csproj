@@ -148,6 +148,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\animate.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\glightbox.min.css" />
+    <Content Include="assets\css\LineIcons.2.0.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\tiny-slider.css" />
+    <Content Include="assets\fonts\LineIcons.svg" />
+    <Content Include="assets\images\favicon.svg" />
+    <Content Include="assets\images\hero\hero-image.png" />
+    <Content Include="assets\images\hero\pattern.png" />
+    <Content Include="assets\images\loading.svg" />
+    <Content Include="assets\images\logo\logo.jpg" />
+    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\glightbox.min.js" />
+    <Content Include="assets\js\jquery-counterup.min.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\tiny-slider.js" />
+    <Content Include="assets\js\wow.min.js" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -173,6 +191,10 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\fonts\LineIcons.eot" />
+    <Content Include="assets\fonts\LineIcons.ttf" />
+    <Content Include="assets\fonts\LineIcons.woff" />
+    <Content Include="assets\fonts\LineIcons.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
