@@ -1,42 +1,151 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "LandingPage";
 }
 
-<h2>LandingPage</h2>
-
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="zxx">
 <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Home Page</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
-    <div class="container text-center mt-5">
-        <h2>Welcome</h2>
-        <p>Please choose an option:</p>
+    <!-- New code for navigation -->
+    <header class="header">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="@Url.Action("LandingPage", "Jobseekr")">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="active" href="@Url.Action("LandingPage", "Jobseekr")">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#">Jobs</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Latest Jobs</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item"><a href="#">Companies</a></li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Login", "Jobseekr")" class="login">Login</a>
+                                <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Sign Up</a>
+                                <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn" style="margin-left: 10px;">Employer?</a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
 
-        <div class="row">
-            <div class="col-md-6">
-                <a href="@Url.Action("Login", "Jobseekr")" class="btn btn-primary btn-lg btn-block">Login</a>
-            </div>
-            <div class="col-md-6">
-                <a href="@Url.Action("Registration", "Jobseekr")" class="btn btn-success btn-lg btn-block">Register</a>
-            </div>
-            <div class="col-md-12 mt-3">
-                <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn btn-warning btn-lg btn-block">Employer? Register Here!</a>
+
+    <!-- Start Welcome Area -->
+    <section class="hero-area">
+        <!-- Single Slider -->
+        <div class="hero-inner">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-6 co-12">
+                        <div class="inner-content">
+                            <div class="hero-text">
+                                <h1 class="wow fadeInUp" data-wow-delay=".3s">
+                                    Find Your Career <br>to Make a Better Life
+                                </h1>
+                                <p class="wow fadeInUp" data-wow-delay=".5s">
+                                    Welcome to Jobseekr – Your Gateway to Exciting Career Opportunities!<br>
+                                    Explore, apply, and embark on your professional journey with confidence. We're here to help you find the perfect job that aligns with your skills and aspirations.
+                                </p>
+                            </div>
+                            <div class="job-search-wrap-two mt-50 wow fadeInUp" data-wow-delay=".7s">
+                                <div class="job-search-form">
+                                    <form action="#">
+                                        <!-- Single Field Item Start  -->
+                                        <div class="single-field-item keyword">
+                                            <label for="keyword">What</label>
+                                            <input id="keyword" placeholder="What jobs you want?" name="keyword"
+                                                   type="text">
+                                        </div>
+                                        <!-- Single Field Item End  -->
+                                        <!-- Single Field Item Start  -->
+                                        <div class="single-field-item location">
+                                            <label for="location">Where</label>
+                                            <input id="location" class="input-field input-field-location"
+                                                   placeholder="Location" name="location" type="text">
+                                        </div>
+                                        <!-- Single Field Item End  -->
+                                        <div class="submit-btn">
+                                            <button class="btn" type="submit">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="trending-keywords mt-30">
+                                    <div class="keywords style-two">
+                                        <span class="title">Popular Keywords:</span>
+                                        <ul>
+                                            <li><a href="#">ASP.NET</a></li>
+                                            <li><a href="#">Flutter</a></li>
+                                            <li><a href="#">Java</a></li>
+                                            <li><a href="#">Python</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 co-12">
+                        <div class="hero-video-head wow fadeInRight" data-wow-delay=".5s">
+                            <div class="video-inner">
+                                <img src="assets/images/hero/hero-image.png" alt="#">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <!--/ End Single Slider -->
+    </section>
+    <!--/ End Welcome Area -->
 
-    </div>
-
-    
 </body>
 </html>
-
-
-
-
