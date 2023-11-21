@@ -155,6 +155,12 @@
     <Content Include="assets\css\main.css" />
     <Content Include="assets\css\tiny-slider.css" />
     <Content Include="assets\fonts\LineIcons.svg" />
+    <Content Include="assets\images\clients\client1.png" />
+    <Content Include="assets\images\clients\client2.png" />
+    <Content Include="assets\images\clients\client3.png" />
+    <Content Include="assets\images\clients\client4.png" />
+    <Content Include="assets\images\clients\client5.png" />
+    <Content Include="assets\images\clients\client6.png" />
     <Content Include="assets\images\favicon.svg" />
     <Content Include="assets\images\hero\hero-image.png" />
     <Content Include="assets\images\hero\pattern.png" />
