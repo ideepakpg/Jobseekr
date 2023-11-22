@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "LandingPage";
 }
 
@@ -9,13 +9,16 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>Home Page</title>
     <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <!-- Web Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
@@ -30,14 +33,6 @@
     <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
-
     <div id="loading-area"></div>
     <!-- New code for navigation -->
     <header class="header">
@@ -67,14 +62,18 @@
                                             <li><a href="#">Latest Jobs</a></li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item"><a href="#">Companies</a></li>
+                                    <li class="nav-item">
+                                        <a href="#">Companies</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Top Companies</a></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                             <!-- navbar collapse -->
                             <div class="button">
                                 <a href="@Url.Action("Login", "Jobseekr")" class="login">Login</a>
                                 <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Sign Up</a>
-                                <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn" style="margin-left: 10px;">Employer?</a>
                             </div>
                         </nav>
                         <!-- navbar -->
@@ -88,62 +87,62 @@
     </header>
     <!-- End Header Area -->
     <!-- Start Welcome Area -->
-    <section class="hero-area">
+    <section class="hero-area style2">
         <!-- Single Slider -->
         <div class="hero-inner">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-lg-6 co-12">
-                        <div class="inner-content">
-                            <div class="hero-text">
-                                <h1 class="wow fadeInUp" data-wow-delay=".3s">
-                                    Find Your Career <br>to Make a Better Life
-                                </h1>
-                                <p class="wow fadeInUp" data-wow-delay=".5s">
-                                    Welcome to Jobseekr – Your Gateway to Exciting Career Opportunities!<br>
-                                    Explore, apply, and embark on your professional journey with confidence. We're here to help you find the perfect job that aligns with your skills and aspirations.
-                                </p>
-                            </div>
-                            <div class="job-search-wrap-two mt-50 wow fadeInUp" data-wow-delay=".7s">
-                                <div class="job-search-form">
-                                    <form action="#">
-                                        <!-- Single Field Item Start  -->
-                                        <div class="single-field-item keyword">
-                                            <label for="keyword">What</label>
-                                            <input id="keyword" placeholder="What jobs you want?" name="keyword"
-                                                   type="text">
+            <div class="home-slider">
+                <div class="single-slider">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-lg-6 co-12">
+                                <div class="inner-content">
+                                    <div class="hero-text">
+                                        <h1 class="wow fadeInUp" data-wow-delay=".3s">
+                                            Find Your Career <br>to Make a
+                                            Better Life
+                                        </h1>
+                                        <p class="wow fadeInUp" data-wow-delay=".5s">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ipa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+                                        <div class="button wow fadeInUp" data-wow-delay=".7s">
+                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Post a Job</a>
+                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
                                         </div>
-                                        <!-- Single Field Item End  -->
-                                        <!-- Single Field Item Start  -->
-                                        <div class="single-field-item location">
-                                            <label for="location">Where</label>
-                                            <input id="location" class="input-field input-field-location"
-                                                   placeholder="Location" name="location" type="text">
-                                        </div>
-                                        <!-- Single Field Item End  -->
-                                        <div class="submit-btn">
-                                            <button class="btn" type="submit">Search</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="trending-keywords mt-30">
-                                    <div class="keywords style-two">
-                                        <span class="title">Popular Keywords:</span>
-                                        <ul>
-                                            <li><a href="#">ASP.NET</a></li>
-                                            <li><a href="#">Flutter</a></li>
-                                            <li><a href="#">Java</a></li>
-                                            <li><a href="#">Python</a></li>
-                                        </ul>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 co-12">
+                                <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
+                                    <img src="~/assets/images/hero/hero-image.png" alt="Image">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 co-12">
-                        <div class="hero-video-head wow fadeInRight" data-wow-delay=".5s">
-                            <div class="video-inner">
-                                <img src="assets/images/hero/hero-image.png" alt="#">
+                </div>
+                <div class="single-slider">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-lg-6 co-12">
+                                <div class="inner-content">
+                                    <div class="hero-text">
+                                        <h1 class="wow fadeInUp" data-wow-delay=".3s">
+                                            Find Your Career <br>to Make a
+                                            Better Life
+                                        </h1>
+                                        <p class="wow fadeInUp" data-wow-delay=".5s">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ipa qui officia deserunt mollit anim id est laborum.
+                                        </p>
+                                        <div class="button wow fadeInUp" data-wow-delay=".7s">
+                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Post a Job</a>
+                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 co-12">
+                                <div class="hero-image wow fadeInRight" data-wow-delay=".ss">
+                                    <img src="~/assets/images/hero/hero-image.png" alt="Image">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,35 +152,24 @@
         <!--/ End Single Slider -->
     </section>
     <!--/ End Welcome Area -->
-    <!-- Start Apply Process Area -->
-    <section class="apply-process section">
+    <!-- Start Call Action Area -->
+    <section class="call-action style2">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="process-item">
-                        <i class="lni lni-user"></i>
-                        <h4>Register Your Account</h4>
-                        <p>Sign up and unlock exciting job opportunities.</p>
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-8 col-12">
+                    <div class="text">
+                        <h2>Create your profile to find thousands Jobs.</h2>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
-                    <div class="process-item">
-                        <i class="lni lni-book"></i>
-                        <h4>Upload Your Resume</h4>
-                        <p>Showcase your skills and experiences to stand out.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-12">
-                    <div class="process-item">
-                        <i class="lni lni-briefcase"></i>
-                        <h4>Apply for Dream Job</h4>
-                        <p>Discover and apply for your dream job opportunities.</p>
+                    <div class="button">
+                        <a href="browse-jobs.html" class="btn">Browse Jobs</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--/ End Apply Process Area -->
+    <!-- /End Call Action Area -->
     <!-- Start Job Category Area -->
     <section class="job-category section">
         <div class="container">
@@ -268,6 +256,36 @@
         </div>
     </section>
     <!-- /End Job Category Area -->
+    <!-- Start Apply Process Area -->
+    <section class="apply-process section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="process-item">
+                        <i class="lni lni-user"></i>
+                        <h4>Register Your Account</h4>
+                        <p>Sign up and unlock exciting job opportunities.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="process-item">
+                        <i class="lni lni-book"></i>
+                        <h4>Upload Your Resume</h4>
+                        <p>Showcase your skills and experiences to stand out.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <div class="process-item">
+                        <i class="lni lni-briefcase"></i>
+                        <h4>Apply for Dream Job</h4>
+                        <p>Discover and apply for your dream job opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--/ End Apply Process Area -->
+
     <!-- Start Clients Area -->
     <div class="client-logo-section">
         <div class="container">
@@ -316,7 +334,9 @@
                             <div class="logo">
                                 <a href="index.html"><img src="assets/images/logo/logo.jpg" alt="Logo"></a>
                             </div>
-                            <p>Start building your creative website with our awesome template Massive.</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ipa qui officia deserunt mollit anim id est laborum. 
+                            </p>
                             <ul class="contact-address">
                                 <li><span>Address:</span> 555 Wall Street, USA, NY</li>
                                 <li><span>Email:</span> example@apus.com</li>
@@ -394,7 +414,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="left">
-                                <p>Designed and Developed by<a href="https://graygrids.com/" rel="nofollow" target="_blank">GrayGrids</a></p>
+                                <p>Copyright © 2023</p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-12">
@@ -446,6 +466,29 @@
                 },
                 1170: {
                     items: 6,
+                }
+            }
+        });
+        //======== Home Slider
+        var slider = new tns({
+            container: '.home-slider',
+            slideBy: 'page',
+            autoplay: true,
+            autoplayButtonOutput: false,
+            mouseDrag: true,
+            gutter: 0,
+            items: 1,
+            nav: false,
+            controls: false, // Set controls to false to hide the arrows
+            responsive: {
+                1200: {
+                    items: 1,
+                },
+                992: {
+                    items: 1,
+                },
+                0: {
+                    items: 1,
                 }
             }
         });
