@@ -4,105 +4,346 @@
     ViewBag.Title = "Enquiry";
 }
 
-<div class="container">
-    <h2>Send Enquiry</h2>
-    <div class="row">
-        <div class="col-md-6">
-            @using (Html.BeginForm("Enquiry", "Jobseekr", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Name, new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Name, new { @class = "form-control", required = "required" })
-                    <div class="invalid-feedback">
-                        Please enter your name.
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- ========================= CSS here ========================= -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/LineIcons.2.0.css" rel="stylesheet" />
+    <link href="~/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/assets/css/tiny-slider.css" rel="stylesheet" />
+    <link href="~/assets/css/glightbox.min.css" rel="stylesheet" />
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <div id="loading-area"></div>
+
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="index.html">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeProfile", "Jobseekr")">MyProfile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")">CompnayProfile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Enquiry", "Jobseekr")">Enquiry</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeInbox", "Jobseekr")">Inbox </a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")">ApplicationStatus</a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
                     </div>
                 </div>
-
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Email, new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Email, new { @class = "form-control", required = "required", type = "email" })
-                    <div class="invalid-feedback">
-                        Please enter a valid email address.
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Enquiry</h1>
+                        <p>
+                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
+                            Business draws on a wide range of different business .
+                        </p>
                     </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Enquiry</li>
+                    </ul>
                 </div>
-
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Subject, new { @class = "form-label" })
-                    @Html.EditorFor(model => model.Subject, new { @class = "form-control" })
-                </div>
-
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.Message, new { @class = "form-label" })
-                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = "4", required = "required" })
-                    <div class="invalid-feedback">
-                        Please enter your message.
-                    </div>
-              </div>
-              
-                <!-- Add a hidden field for EmployeeId (because it shouldn't be visible to employee)-->
-                  @Html.HiddenFor(model => model.EmployeeId)
-                
-                <button type="submit" class="btn btn-primary">Submit Enquiry</button>
-            }
+            </div>
         </div>
     </div>
-</div>
+    <!-- End Breadcrumbs -->
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("Enquiry", "Jobseekr", FormMethod.Post, new { @class = "needs-validation", id = "enquiryForm", novalidate = "novalidate" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title">Send Enquiry</h3>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Name, new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Name, new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Email, new { @class = "form-control", required = "required", type = "email" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Message, new { @class = "form-label" })
+                                        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = "4", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.Subject, new { @class = "form-label" })
+                                        @Html.EditorFor(model => model.Subject, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 button">
+                                    @Html.HiddenFor(model => model.EmployeeId)
+                                    <button type="submit" class="btn">Submit Enquiry</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+    <!--/ Start Footer Area -->
+    <footer class="footer">
+        <!-- Start Middle Top -->
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="f-about single-footer">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
+                            </div>
+                            <p>Lorem ipsum</p>
+                            <ul class="contact-address">
+                                <li><span>Address:</span> 555 Wall Street, USA, NY</li>
+                                <li><span>Email:</span> example@apus.com</li>
+                                <li><span>Call:</span> 555-555-1234</li>
+                            </ul>
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="lni lni-facebook-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>For Candidates</h3>
+                                    <ul>
+                                        <li><a href="#">User Dashboard</a></li>
+                                        <li><a href="#">CV Packages</a></li>
+                                        <li><a href="#">Jobs Featured</a></li>
+                                        <li><a href="#">Jobs Urgent</a></li>
+                                        <li><a href="#">Candidate List</a></li>
+                                        <li><a href="#">Candidates Grid</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>For Employers</h3>
+                                    <ul>
+                                        <li><a href="#">Post New</a></li>
+                                        <li><a href="#">Employer List</a></li>
+                                        <li><a href="#">Employers Grid</a></li>
+                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="#">Jobs Listing</a></li>
+                                        <li><a href="#">Jobs Featured</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer newsletter">
+                                    <h3>Join Our Newsletter</h3>
+                                    <p>Subscribe to get the latest jobs posted, candidates...</p>
+                                    <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                                        <input name="EMAIL" placeholder="Your email address" class="common-input"
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'Your email address'" required="" type="email">
+                                        <div class="button">
+                                            <button class="btn">Subscribe Now! <span class="dir-part"></span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="left">
+                                <p>
+                                    Copyright © 2023
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="right">
+                                <ul>
+                                    <li><a href="#">Terms of use</a></li>
+                                    <li><a href="#"> Privacy Policy</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Middle -->
+    </footer>
+    <!--/ End Footer Area -->
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/tiny-slider.js"></script>
+    <script src="~/assets/js/glightbox.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
 
 
+    <!-- Add success and error alert elements -->
+    <!-- ... Your existing form and script sections ... -->
+    <div class="toast-container position-fixed p-3" style="top: 1rem; right: 1rem; z-index: 1000">
+        <div id="success-toast" class="toast bg-success text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Success</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="success-toast-body">
+                Enquiry submitted successfully!
+            </div>
+        </div>
 
-<div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-    Enquiry submitted successfully!
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+        <div id="error-toast" class="toast bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Error</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body" id="error-toast-body">
+                Enquiry submission failed. Please fill all fields and try again.
+            </div>
+        </div>
+    </div>
 
-<div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
-    Enquiry submission failed. Please fill all fields and try again.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-@*jquery*@
-<script>
+    <script>
     $(document).ready(function () {
-        $("form").on("submit", function (e) {
+        $("#enquiryForm").on("submit", function (e) {
             e.preventDefault();
-
 
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("Enquiry", "Jobseekr")",
                 data: $(this).serialize(),
                 success: function (data) {
-                    // Check the response from the server
                     if (data.success) {
-                        // if submission is success - show the success alert
-                        $("#success-alert").fadeIn(500);
-
-                        // Hide the success alert after 1 seconds
-                        setTimeout(function () {
-                            $("#success-alert").fadeOut(500);
-                        }, 1000);
+                        showToast("success", "Enquiry submitted successfully!");
                     } else {
-                        $("#error-alert").fadeIn(500);
-
-                        // 1 seconds (1000 milliseconds)
-                        setTimeout(function () {
-                            $("#error-alert").fadeOut(500);
-                        }, 1000);
+                        showToast("error", "Enquiry submission failed. Please fill all fields and try again.");
                     }
                 },
                 error: function () {
-                    // Ajax request encountered an error
-                    // show the error alert
-                    $("#error-alert").fadeIn(500, function () {
-                        $(this).fadeOut(1000); 
-                    });
+                    showToast("error", "Enquiry submission failed. Please try again later.");
                 }
             });
         });
+
+        function showToast(type, message) {
+            // Hide any existing toasts
+            $(".toast").toast("hide");
+
+            // Show the appropriate toast
+            $("#" + type + "-toast-body").text(message);
+            $("#" + type + "-toast").toast("show");
+        }
     });
-</script>
+    </script>
+
+</body>
+
+</html>
