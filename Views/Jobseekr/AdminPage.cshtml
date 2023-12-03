@@ -1,19 +1,228 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "AdminPage";
 }
-
-<h2>AdminPage</h2>
-
-
-<div>
-    <a href="@Url.Action("ViewAllEmployees", "Jobseekr")" class="btn btn-primary">Employees</a>
-    <a href="@Url.Action("ViewAllEmployers", "Jobseekr")" class="btn btn-success">Employers</a>
-    <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")" class="btn btn-dark">Companies</a>
-    <a href="@Url.Action("ViewAllJobs", "Jobseekr")" class="btn btn-dark">Jobs</a>
-    <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")" class="btn btn-secondary">Job Applications</a>
-    <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")" class="btn btn-danger">Enquiries</a>
-    <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")" class="btn btn-info">Review & Ratings</a>
-    <a href="@Url.Action("Logout", "Jobseekr")" class="btn btn-danger">Logout</a>
-</div>
-
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <!-- Web Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <!-- ========================= CSS here ========================= -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/LineIcons.2.0.css" rel="stylesheet" />
+    <link href="~/assets/css/animate.css" rel="stylesheet" />
+    <link href="~/assets/css/tiny-slider.css" rel="stylesheet" />
+    <link href="~/assets/css/glightbox.min.css" rel="stylesheet" />
+    <link href="~/assets/css/main.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="index.html">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployees", "Jobseekr")">Employees</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployers", "Jobseekr")">Employers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")">Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobs", "Jobseekr")">Jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")">Job Applications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")">Enquiries</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")">Review & Ratings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Welocome To Admin Panel</h1>
+                        <p>
+                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
+                            Business draws on a wide range of different business .
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Admin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!--/ Start Footer Area -->
+    <footer class="footer">
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <!-- Single Widget -->
+                        <div class="f-about single-footer">
+                            <div class="logo">
+                                <a href="index.html"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
+                            </div>
+                            <p>Lorem ipsum</p>
+                            <ul class="contact-address">
+                                <li><span>Address:</span> 555 Wall Street, USA, NY</li>
+                                <li><span>Email:</span> example@apus.com</li>
+                                <li><span>Call:</span> 555-555-1234</li>
+                            </ul>
+                            <div class="footer-social">
+                                <ul>
+                                    <li><a href="#"><i class="lni lni-facebook-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-8 col-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>For Candidates</h3>
+                                    <ul>
+                                        <li><a href="#">User Dashboard</a></li>
+                                        <li><a href="#">CV Packages</a></li>
+                                        <li><a href="#">Jobs Featured</a></li>
+                                        <li><a href="#">Jobs Urgent</a></li>
+                                        <li><a href="#">Candidate List</a></li>
+                                        <li><a href="#">Candidates Grid</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>For Employers</h3>
+                                    <ul>
+                                        <li><a href="#">Post New</a></li>
+                                        <li><a href="#">Employer List</a></li>
+                                        <li><a href="#">Employers Grid</a></li>
+                                        <li><a href="#">Job Packages</a></li>
+                                        <li><a href="#">Jobs Listing</a></li>
+                                        <li><a href="#">Jobs Featured</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer newsletter">
+                                    <h3>Join Our Newsletter</h3>
+                                    <p>Subscribe to get the latest jobs posted, candidates...</p>
+                                    <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                                        <input name="EMAIL" placeholder="Your email address" class="common-input"
+                                               onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'Your email address'" required="" type="email">
+                                        <div class="button">
+                                            <button class="btn">Subscribe Now! <span class="dir-part"></span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Footer Middle -->
+        <!-- Start Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="inner">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="left">
+                                <p>
+                                    Copyright © 2023
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="right">
+                                <ul>
+                                    <li><a href="#">Terms of use</a></li>
+                                    <li><a href="#"> Privacy Policy</a></li>
+                                    <li><a href="#">Faq</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Middle -->
+    </footer>
+    <!--/ End Footer Area -->
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/tiny-slider.js"></script>
+    <script src="~/assets/js/glightbox.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
+</html>
