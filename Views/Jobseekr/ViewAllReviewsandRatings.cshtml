@@ -1,43 +1,182 @@
-﻿@model IEnumerable<Jobseekr.Models.Review>
+﻿@model List<Jobseekr.Models.Review>
 
 @{
-    ViewBag.Title = "ViewAllReviewsandRatings";          // this view is for admin
+    ViewBag.Title = "Employee Reviews";
 }
 
-<h2>ViewAllReviewsandRatings</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.JobId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeId)
-        </th>
-        <th></th>
-    </tr>
+<!
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeId)
-        </td>
-    </tr>
-}
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-</table>
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+</head>
+<body>
+
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="index.html">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployees", "Jobseekr")">Employees</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployers", "Jobseekr")">Employers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")">Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobs", "Jobseekr")">Jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")">Job Applications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")">Enquiries</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")" class="active">Review & Ratings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Employee Reviews</h1>
+                        <p>
+                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
+                            Business draws on a wide range of different business .
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Employee Reviews</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!-- Start View All Reviews and Ratings Area -->
+    <section class="find-job section">
+
+        <div class="container">
+            <div class="single-head">
+                <div class="row">
+                    @helper RenderStarRating(int rating)
+                    {
+                        <div class="star-rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= rating)
+                                {
+                                    <i class="lni lni-star-filled"></i>
+                                }
+                                else
+                                {
+                                    <i class="lni lni-star"></i>
+                                }
+                            }
+                        </div>
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6 col-12">
+                            <div class="single-job">
+                                <div class="job-content">
+                                    <h4>                                      
+                                        <h5>JobId: @Html.DisplayFor(modelItem => item.JobId)</h5>
+                                    </h4>                        
+                                    <h4>
+                                        <h5>EmployeeID: @Html.DisplayFor(modelItem => item.EmployeeId)</h5>
+                                    </h4>
+                                    <ul>
+                                        <h4>Rating:</h4>
+                                       <li><i class="lni lni"></i> @RenderStarRating(item.Rating)</li>
+                                    </ul>
+                                    <br />
+                                    <h5>
+                                        <a> Comment: @Html.DisplayFor(modelItem => item.Comment)</a>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination center">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Pagination -->
+            </div>
+        </div>
+    </section>
+    <!-- End View All Reviews and Ratings Area -->
+   
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+</body>
+</html>
