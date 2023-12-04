@@ -4,59 +4,163 @@
     ViewBag.Title = "ViewAllCompanyProfiles";          // this view is for admin
 }
 
-<h2>ViewAllCompanyProfiles</h2>           
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CompanyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Founded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contact)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th></th>
-    </tr>
+<head>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-             <td>
-                 @Html.DisplayFor(modelItem => item.CompanyId)
-             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Founded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Website)
-            </td>
-        </tr>
-    }
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
-</table>
+</head>
+<body>
+
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                       
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployees", "Jobseekr")">Employees</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployers", "Jobseekr")">Employers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")" class="active">Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobs", "Jobseekr")">Jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")">Job Applications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")">Enquiries</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")">Review & Ratings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Company Profiles</h1>
+                        <p>
+                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
+                            Business draws on a wide range of different business .
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Company Profiles</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!-- Start View All Company Profiles Area -->
+    <section class="find-job section">
+        <div class="container">
+            <div class="single-head">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6 col-12">
+
+                            <div class="single-job">
+
+                                <div class="job-content">
+                                    <h4>
+                                        <a href="job-details.html">
+                                            @Html.DisplayFor(modelItem => item.CompanyId)
+                                            @Html.DisplayFor(modelItem => item.CompanyName)
+                                        </a>
+                                    </h4>
+                                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <ul>
+                                        <li>
+                                            <i class="lni lni-calendar"></i><a href="#">
+                                                @Html.DisplayFor(modelItem => item.Founded)
+                                            </a>
+                                        </li>
+
+                                        <li><i class="lni lni-phone"></i>  @Html.DisplayFor(modelItem => item.Contact)</li>
+                                        <li><i class="lni lni-map-marker"></i>@Html.DisplayFor(modelItem => item.Location)</li>
+                                        <li><i class="lni lni-website"></i>@Html.DisplayFor(modelItem => item.Website)</li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination center">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Pagination -->
+            </div>
+        </div>
+    </section>
+    <!-- End View All Company Profiles Area -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+</body>
+
+</html>
