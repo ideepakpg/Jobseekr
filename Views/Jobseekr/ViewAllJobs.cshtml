@@ -4,59 +4,170 @@
     ViewBag.Title = "ViewAllJobs";           // this view is for admin
 }
 
-<h2>ViewAllJobs</h2>           
+<!
 
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.JobId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Salary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostedDate)
-        </th>
-        <th></th>
-    </tr>
+<head>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-             <td>
-                 @Html.DisplayFor(modelItem => item.JobId)
-             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PostedDate)
-            </td>
-            <td>
-            <a href='@Url.Action("DeleteJob", "Jobseekr", new { jobId = item.JobId })' onclick="return confirm('Are you sure you want to delete this job?');">
-                <button class="btn btn-danger">Delete</button>
-            </a>
-        </td>
-        </tr>
-    }
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
-</table>
+</head>
+<body>
+
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="index.html">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployees", "Jobseekr")">Employees</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEmployers", "Jobseekr")">Employers</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllCompanyProfiles", "Jobseekr")">Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobs", "Jobseekr")" class="active">Jobs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllJobApplications", "Jobseekr")">Job Applications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllEnquiries", "Jobseekr")">Enquiries</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewAllReviewsandRatings", "Jobseekr")">Review & Ratings</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Jobs</h1>
+                        <p>
+                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
+                            Business draws on a wide range of different business .
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Jobs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!-- Start View All Jobs Area -->
+    <section class="find-job section">
+        <div class="container">
+            <div class="single-head">
+                <div class="row">
+                    @foreach (var jobListing in Model)
+                    {
+                        <div class="col-lg-6 col-12">
+
+                            <div class="single-job">
+
+                                <div class="job-content">
+                                    <h4>
+                                        <a href="job-details.html">
+                                            @Html.DisplayFor(modelItem => jobListing.JobId).
+                                            @jobListing.JobTitle
+                                        </a>
+                                    </h4>
+                                    <p>@jobListing.Description</p>
+                                    <ul>
+                                        <li><i class="lni lni-website"></i><a href="#">@jobListing.PostedDate</a></li>
+                                        <li><i class="lni lni-dollar"></i> @jobListing.Salary</li>
+                                        <li><i class="lni lni-map-marker"></i> @jobListing.Location</li>
+                                    </ul>
+                                </div>
+                                <div class="job-button">
+                                    <ul>
+                                        <li>
+                                            <a href='@Url.Action("DeleteJob", "Jobseekr", new { jobId = jobListing.JobId })'
+                                               onclick="return confirm('Are you sure you want to delete this job?');" class="btn btn-danger">
+                                                Delete Job
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination center">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Pagination -->
+            </div>
+        </div>
+    </section>
+    <!-- End View All Jobs Area -->
+  
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top btn-hover">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+</body>
+</html>
