@@ -1,4 +1,4 @@
-﻿@model List<Jobseekr.Models.JobListing>
+﻿﻿@model List<Jobseekr.Models.JobListing>
 
 <!-- Display a Bootstrap alert when employee tries to apply for a job that he/she already applied -->
 @if (TempData["EnoughApply"] != null && (bool)TempData["EnoughApply"])
@@ -19,28 +19,15 @@
 <html class="no-js" lang="zxx">
 
 <head>
-
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
-    <!-- Web Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
-
-    <!-- ========================= CSS here ========================= -->
-    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/assets/css/LineIcons.2.0.css" rel="stylesheet" />
-    <link href="~/assets/css/animate.css" rel="stylesheet" />
-    <link href="~/assets/css/tiny-slider.css" rel="stylesheet" />
-    <link href="~/assets/css/glightbox.min.css" rel="stylesheet" />
-    <link href="~/assets/css/main.css" rel="stylesheet" />
 </head>
 <body>
     <div id="loading-area"></div>
-
     <!-- Start Header Area -->
     <header class="header other-page">
         <div class="navbar-area">
@@ -48,7 +35,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
-                            <a class="navbar-brand logo" href="index.html">
+                            <a class="navbar-brand logo" href="/Jobseekr/AvailableJobs">
                                 <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -61,22 +48,23 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a href="@Url.Action("EmployeeProfile", "Jobseekr")">MyProfile</a>
+                                        <a href="@Url.Action("EmployeeProfile", "Jobseekr")">My Profile</a>
 
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")">CompnayProfile</a>
+                                        <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")">Compnay Profiles</a>
 
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("Enquiry", "Jobseekr")" class="active">Enquiry</a>
+                                        <a href="@Url.Action("Enquiry", "Jobseekr")">Enquiry</a>
 
                                     </li>
                                     <li class="nav-item">
                                         <a href="@Url.Action("EmployeeInbox", "Jobseekr")">Inbox </a>
+
                                     </li>
                                     <li class="nav-item">
-                                        <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")">ApplicationStatus</a>
+                                        <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")">Application Status</a>
 
                                     </li>
                                 </ul>
@@ -88,7 +76,7 @@
                                 </a>
                             </div>
                         </nav>
-                        <!-- navbar -->
+                      <!-- navbar -->
                     </div>
                 </div>
                 <!-- row -->
@@ -106,12 +94,11 @@
                     <div class="breadcrumbs-content">
                         <h1 class="page-title">Available Jobs</h1>
                         <p>
-                            Business plan draws on a wide range of knowledge from different business<br> disciplines.
-                            Business draws on a wide range of different business .
+                            Explore exciting career opportunities that blend expertise from various disciplines. <br /> Join us in a dynamic workplace, where your skills contribute to our collective success. <br /> Discover your next career move with us!
                         </p>
                     </div>
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/Jobseekr/AvailableJobs">Home</a></li>
                         <li>Browse Job</li>
                     </ul>
                 </div>
@@ -119,28 +106,8 @@
         </div>
     </div>
     <!-- End Breadcrumbs -->
-    <!-- Start Find Job Area -->
+    <!-- Start Available Jobs Area -->
     <section class="find-job section">
-        <div class="search-job">
-            <div class="container">
-                <div class="search-nner">
-                    @using (Html.BeginForm("SearchJobs", "Jobseekr", FormMethod.Get))
-                    {
-                        <div class="row">
-                            <div class="col-lg-5 col-md-5 col-xs-12">
-                                @Html.TextBox("jobName", null, new { @class = "form-control", placeholder = "Keyword: Name, Tag" })
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-xs-12">
-                                @Html.TextBox("cityName", null, new { @class = "form-control", placeholder = "Location: City, State" })
-                            </div>
-                            <div class="col-lg-2 col-md-2 col-xs-12 button">
-                                <button type="submit" class="btn btn-common float-right">Search</button>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
         <div class="container">
             <div class="single-head">
                 <div class="row">
@@ -154,14 +121,14 @@
                                     <h4><a href="job-details.html">@jobListing.JobTitle</a></h4>
                                     <p>@jobListing.Description</p>
                                     <ul>
-                                        <li><i class="lni lni-website"></i><a href="#">@jobListing.PostedDate</a></li>
+                                        <li><i class="lni lni-website"></i><a>@jobListing.PostedDate</a></li>
                                         <li><i class="lni lni-dollar"></i> @jobListing.Salary</li>
                                         <li><i class="lni lni-map-marker"></i> @jobListing.Location</li>
                                     </ul>
                                 </div>
                                 <div class="job-button">
                                     <ul>
-                                        <li> @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn" })</li>
+                                        <li> @Html.ActionLink("Apply", "ApplyJob", "Jobseekr", new { jobId = jobListing.JobId }, new { @class = "btn btn-transparent" })</li>
                                         <li><a href="@Url.Action("ReviewJob", "Jobseekr", new { jobId = jobListing.JobId })" class="btn btn-primary">Review & Rate</a></li>
                                     </ul>
                                 </div>
@@ -189,132 +156,6 @@
             </div>
         </div>
     </section>
-    <!-- /End Find Job Area -->
-    <!-- Start Footer Area -->
-    <footer class="footer">        
-        <!-- Start Middle Top -->
-        <div class="footer-middle">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="f-about single-footer">
-                            <div class="logo">
-                                <a href="index.html"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
-                            </div>
-                            <p>Lorem ipsum</p>
-                            <ul class="contact-address">
-                                <li><span>Address:</span> 555 Wall Street, USA, NY</li>
-                                <li><span>Email:</span> example@apus.com</li>
-                                <li><span>Call:</span> 555-555-1234</li>
-                            </ul>
-                            <div class="footer-social">
-                                <ul>
-                                    <li><a href="#"><i class="lni lni-facebook-original"></i></a></li>
-                                    <li><a href="#"><i class="lni lni-twitter-original"></i></a></li>
-                                    <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
-                                    <li><a href="#"><i class="lni lni-pinterest"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div>
-                    <div class="col-lg-8 col-12">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <!-- Single Widget -->
-                                <div class="single-footer f-link">
-                                    <h3>For Candidates</h3>
-                                    <ul>
-                                        <li><a href="#">User Dashboard</a></li>
-                                        <li><a href="#">CV Packages</a></li>
-                                        <li><a href="#">Jobs Featured</a></li>
-                                        <li><a href="#">Jobs Urgent</a></li>
-                                        <li><a href="#">Candidate List</a></li>
-                                        <li><a href="#">Candidates Grid</a></li>
-                                    </ul>
-                                </div>
-                                <!-- End Single Widget -->
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <!-- Single Widget -->
-                                <div class="single-footer f-link">
-                                    <h3>For Employers</h3>
-                                    <ul>
-                                        <li><a href="#">Post New</a></li>
-                                        <li><a href="#">Employer List</a></li>
-                                        <li><a href="#">Employers Grid</a></li>
-                                        <li><a href="#">Job Packages</a></li>
-                                        <li><a href="#">Jobs Listing</a></li>
-                                        <li><a href="#">Jobs Featured</a></li>
-                                    </ul>
-                                </div>
-                                <!-- End Single Widget -->
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <!-- Single Widget -->
-                                <div class="single-footer newsletter">
-                                    <h3>Join Our Newsletter</h3>
-                                    <p>Subscribe to get the latest jobs posted, candidates...</p>
-                                    <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-                                        <input name="EMAIL" placeholder="Your email address" class="common-input"
-                                               onfocus="this.placeholder = ''"
-                                               onblur="this.placeholder = 'Your email address'" required="" type="email">
-                                        <div class="button">
-                                            <button class="btn">Subscribe Now! <span class="dir-part"></span></button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- End Single Widget -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/ End Footer Middle -->
-        <!-- Start Footer Bottom -->
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="left">
-                                <p>
-                                    Copyright © 2023
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-12">
-                            <div class="right">
-                                <ul>
-                                    <li><a href="#">Terms of use</a></li>
-                                    <li><a href="#"> Privacy Policy</a></li>
-                                    <li><a href="#">Faq</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Footer Middle -->
-    </footer>
-    <!--/ End Footer Area -->
-    <!-- ========================= scroll-top ========================= -->
-    <a href="#" class="scroll-top btn-hover">
-        <i class="lni lni-chevron-up"></i>
-    </a>
-
-    <!-- ========================= JS here ========================= -->
-    <script src="~/assets/js/jquery-counterup.min.js"></script>
-    <script src="~/assets/js/bootstrap.min.js"></script>
-    <script src="~/assets/js/wow.min.js"></script>
-    <script src="~/assets/js/tiny-slider.js"></script>
-    <script src="~/assets/js/glightbox.min.js"></script>
-    <script src="~/assets/js/main.js"></script>
-
+    <!-- /End Available Jobs Area -->
 </body>
-
 </html>
