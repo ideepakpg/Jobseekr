@@ -4,42 +4,147 @@
     ViewBag.Title = "Create Company Profile";
 }
 
-<div class="container">
-    <h2>Create Company Profile</h2>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-    @using (Html.BeginForm("CreateProfile", "Jobseekr", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        <!-- Form fields for creating the company profile -->
-        <div class="form-group">
-            @Html.LabelFor(model => model.CompanyName)
-            @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description)
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Location)
-            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Founded)
-            @Html.EditorFor(model => model.Founded, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Contact)
-            @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Website)
-            @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-        <!-- Add a hidden field for EmployerId (because it shouldn't be visible to employer)-->
-        @Html.HiddenFor(model => model.EmployerId)
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/WelcomePage">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Jobseekr")">Post Job</a>
 
-        <!-- Add other fields here -->
-        <button type="submit" class="btn btn-primary">Create new Profile</button>
-    }
-</div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployerProfile", "Jobseekr")" class="active">My Profile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProfile", "Jobseekr")">My Companies</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AllCompanyProfiles", "Jobseekr")">All Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewJobApplications", "Jobseekr")>Job Applications</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewEmployeeReviews", "Jobseekr")>Employee Reviews</a>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                      <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Create Company Profiles Section -->
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("CreateProfile", "Jobseekr", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title"> Craete Compamy Profile</h3>
+                            @Html.HiddenFor(model => model.CompanyId)
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Company Name*</label>
+                                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Location*</label>
+                                        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Description*</label>
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Founded*</label>
+                                        @Html.EditorFor(model => model.Founded, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Contact*</label>
+                                        @Html.EditorFor(model => model.Contact, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Website*</label>
+                                        @Html.EditorFor(model => model.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-n2 button">
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                    @Html.ActionLink("Back to Profiles", "ViewProfile", null, new { @class = "d-block btn btn-alt" })
+                                </div>
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+
+                                    @Html.HiddenFor(model => model.EmployerId)
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- End Create Company Profiles Section -->
+</body>
+</html>
