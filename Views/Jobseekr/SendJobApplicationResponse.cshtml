@@ -4,27 +4,154 @@
     ViewBag.Title = "Send Job Application Response";
 }
 
-<h2>Send Job Application Response</h2>
 
-<p>Job Id: @Model.JobId</p>
-<p>Job Title: @Model.JobTitle</p>
-<p>Applicant Name: @Model.ApplicantName</p>
-<p>Applicant Email: @Model.ApplicantEmail</p>
-<p>Resume: <a href="@Model.Resume" target="_blank">Resume Link</a></p>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-@using (Html.BeginForm("SubmitJobApplicationResponse", "Jobseekr", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.ApplicationId)
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-    <div class="form-group">
-        <label for="response">Select Response:</label>
-        <select name="response" class="form-control">
-            <option value="Selected">Selected</option>
-            <option value="Rejected">Rejected</option>
-        </select>
-    </div>
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/WelcomePage">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Jobseekr")">Create</a>
 
-    <button type="submit" class="btn btn-primary">Submit Response</button>
-}
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployerProfile", "Jobseekr")">My Profile</a>
 
-<a href="@Url.Action("ViewJobApplications", "Jobseekr")">Back to Job Applications</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProfile", "Jobseekr")">My Companies</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AllCompanyProfiles", "Jobseekr")">All Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewJobApplications", "Jobseekr") class="active">Job Applications</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewEmployeeReviews", "Jobseekr")>Employee Reviews</a>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Submit Job Application Response Section -->
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("SubmitJobApplicationResponse", "Jobseekr", FormMethod.Post))
+                {
+                    @Html.HiddenFor(model => model.ApplicationId)
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title">Submit Response for Job Application</h3>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>JobId</label>
+                                        <h5>
+                                            @Html.DisplayFor(model => model.JobId)
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Applicant Name</label>
+                                        <h5>
+                                            @Html.DisplayFor(model => model.ApplicantName, new { @class = "form-control", required = "required" })
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Applicant Email</label>
+                                        <h5>
+                                            @Html.DisplayFor(model => model.ApplicantEmail, new { @class = "form-control", required = "required" })
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Resume Link:</label>
+                                        <a href="@Model.Resume" target="_blank">
+                                            @Model.Resume
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="response">Select Response:</label>
+                                        <select name="response" class="form-control">
+                                            <option value="Selected">Selected</option>
+                                            <option value="Rejected">Rejected</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="row m-n2 button">
+                                    <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                        @Html.ActionLink("Back to Job Applications", "ViewJobApplications", null, new { @class = "d-block btn btn-alt" })
+                                    </div>
+                                    <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+
+                                        <button type="submit" class="btn btn-primary">Submit Response</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- End Submit Job Application Response Section -->
+</body>
+</html>

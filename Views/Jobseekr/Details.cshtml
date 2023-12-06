@@ -1,58 +1,212 @@
 ﻿@model Jobseekr.Models.JobListing
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Job Details";
 }
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<h2>Details</h2>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-<div>
-    <h4>JobListing</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </dt>
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/WelcomePage">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Jobseekr")">Post Job</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobTitle)
-        </dd>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployerProfile", "Jobseekr")">My Profile</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProfile", "Jobseekr")">My Companies</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AllCompanyProfiles", "Jobseekr")">All Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewJobApplications", "Jobseekr")>Job Applications</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewEmployeeReviews", "Jobseekr")>Employee Reviews</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.Location)
-        </dd>
+                                    </li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Salary)
-        </dt>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Job Details</h1>
+                        <p>
+                            Explore detailed information about job opportunities.<br /> Our business plan incorporates diverse knowledge from various business disciplines, ensuring a comprehensive view of different aspects related to each job.
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="/Jobseekr/WelcomePage">Home</a></li>
+                        <li>Job Details</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!-- Start Job Details -->
+    <div class="job-details section">
+        <div class="container">
+            <div class="row mb-n5">
+                <!-- Job List Details Start -->
+                <div class="col-lg-8 col-12">
+                    <div class="job-details-inner">
+                        <div class="job-details-head row mx-0">
 
-        <dd>
-            @Html.DisplayFor(model => model.Salary)
-        </dd>
+                            <div class="salary-type col-auto order-sm-3">
+                                <span class="salary-range"> @Html.DisplayFor(model => model.Salary)</span>
+                                <span class="badge badge-success">Full Time</span>
+                            </div>
+                            <div class="content col">
+                                <h5 class="title">@Html.DisplayFor(model => model.JobTitle)</h5>
+                                <ul class="meta">
+                                    <li>
+                                        <strong class="text-primary"> @Html.DisplayFor(model => model.PostedDate)</strong>
+                                    </li>
+                                    <li><i class="lni lni-map-marker"></i>   @Html.DisplayFor(model => model.Location)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="job-details-body">
+                            <h6 class="mb-3">Job Description</h6>
+                            <p>
+                                @Html.DisplayFor(model => model.Description)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Job List Details End -->
+                <!-- Job Sidebar Wrap Start -->
+                <div class="col-lg-4 col-12">
+                    <div class="job-details-sidebar">
+                        <!-- Sidebar (Apply Buttons) Start -->
+                        <div class="sidebar-widget">
+                            <div class="inner">
+                                <div class="row m-n2 button">
+                                    <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                        @Html.ActionLink("Edit", "Edit", new { id = Model.JobId }, new { @class = "d-block btn" })
+                                    </div>
+                                    <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                        @Html.ActionLink("Back to List", "WelcomePage", null, new { @class = "d-block btn btn-alt" })
+                                    </div>
+                                </div>
+                            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostedDate)
-        </dt>
+                        </div>
+                        <!-- Sidebar (Apply Buttons) End -->
+                        <!-- Sidebar (Job Overview) Start -->
+                        <div class="sidebar-widget">
+                            <div class="inner">
+                                <h6 class="title">Job Overview</h6>
+                                <ul class="job-overview list-unstyled">
+                                    <li>
+                                        <strong>Published on:</strong>
+                                        @Html.DisplayFor(model => model.PostedDate)
+                                    </li>
+                                    @*<li><strong>Vacancy:</strong> 02</li>*@
+                                    <li><strong>Employment Status:</strong> Full-time</li>
+                                    <li><strong>Experience:</strong> Any</li>
+                                    <li>
+                                        <strong>Job Location:</strong>
+                                        @Html.DisplayFor(model => model.Location)
+                                    </li>
+                                    <li>
+                                        <strong>Salary:</strong>
+                                        @Html.DisplayFor(model => model.Salary)
+                                    </li>
+                                    <li><strong>Gender:</strong> Any</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Sidebar (Job Overview) End -->
+                        <!-- Sidebar (Job Location) Start -->
+                        <div class="sidebar-widget">
+                            <div class="inner">
+                                <h6 class="title">Job Location</h6>
+                                <div class="mapouter">
+                                    <div class="gmap_canvas">
+                                        <iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=Infopark%20Kochi&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.com">123movies old site</a>
+                                        <style>
+                                            .mapouter {
+                                                position: relative;
+                                                text-align: right;
+                                                height: 300px;
+                                                width: 100%;
+                                            }
 
-        <dd>
-            @Html.DisplayFor(model => model.PostedDate)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.JobId }) |
-    @Html.ActionLink("Back to List", "WelcomePage")
-</p>
+                                            .gmap_canvas {
+                                                overflow: hidden;
+                                                background: none !important;
+                                                height: 300px;
+                                                width: 100%;
+                                            }
+                                        </style><a href="https://maps-google.github.io/embed-google-map/">embed google map</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar (Job Location) End -->
+                    </div>
+                </div>
+                <!-- Job Sidebar Wrap End -->
+            </div>
+        </div>
+    </div>
+    <!-- End Job Details -->
+</body>
+</html>

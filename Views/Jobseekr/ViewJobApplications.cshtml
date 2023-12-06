@@ -4,32 +4,161 @@
     ViewBag.Title = "Job Applications";
 }
 
-<h2>Job Applications</h2>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Job Id</th>
-            <th>Job Title</th>
-            <th>Applicant Name</th>
-            <th>Applicant Email</th>
-            <th>Resume</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var application in Model)
-        {
-            <tr>
-                <td>@application.JobId</td>
-                <td>@application.JobTitle</td>
-                <td>@application.ApplicantName</td>
-                <td>@application.ApplicantEmail</td>
-                <td><a href="@application.Resume" target="_blank">Resume Link</a></td>
-                <td>
-                    @Html.ActionLink("Send Response", "SendJobApplicationResponse", new { applicationId = application.ApplicationId })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/WelcomePage">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Jobseekr")">Post Job</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployerProfile", "Jobseekr")">My Profile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProfile", "Jobseekr")">My Companies</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AllCompanyProfiles", "Jobseekr")">All Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewJobApplications", "Jobseekr") class="active">Job Applications</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewEmployeeReviews", "Jobseekr")>Employee Reviews</a>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Breadcrumbs -->
+    <div class="breadcrumbs overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumbs-content">
+                        <h1 class="page-title">Job Applications</h1>
+                        <p>
+                            Find the job applications submitted for the positions you have advertised.
+                        </p>
+                    </div>
+                    <ul class="breadcrumb-nav">
+                        <li><a href="/Jobseekr/WelcomePage">Home</a></li>
+                        <li>Job Applications</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Breadcrumbs -->
+    <!-- Start View All Job Applications for Employer Section -->
+    <section class="find-job section">
+        <div class="container">
+            <div class="single-head">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6 col-12">
+                            <div class="single-job">
+                                <div class="job-content">
+                                    @*<h5>
+                                        <span class="label">Application ID:</span> @Html.DisplayFor(modelItem => item.ApplicationId)
+                                    </h5>*@
+                                    <h5>
+                                        @Html.DisplayFor(modelItem => item.ApplicantName)
+                                    </h5>
+                                    <br />
+                                    <h5>
+                                        @Html.DisplayFor(modelItem => item.JobTitle)
+                                    </h5>
+                                    <ul>
+                                        <li><i class="lni lni-envelope"></i>@Html.DisplayFor(modelItem => item.ApplicantEmail)</li>
+                                        <li><i class="lni lni-link"></i> @Html.DisplayFor(modelItem => item.Resume)</li>
+                                        <li><i class="lni lni-reply"></i>@Html.DisplayFor(modelItem => item.ResponseStatus)</li>
+                                        <li><span class="label">Employee ID:</span>@Html.DisplayFor(modelItem => item.EmployeeId)</li>
+                                    </ul>
+                                </div>
+                                <div class="job-button">
+                                    <ul>
+                                        <li>
+                                            <a href='@Url.Action("SendJobApplicationResponse", "Jobseekr", new { applicationId = item.ApplicationId })' class="btn btn-primary">
+                                                Send Response
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination center">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Pagination -->
+            </div>
+        </div>
+    </section>
+    <!-- End View All Job Applications for Employer Section -->
+</body>
+</html>

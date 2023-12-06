@@ -4,70 +4,143 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>JobListing</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.JobId)
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
+
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/WelcomePage">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Create", "Jobseekr")" class="active">Create</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployerProfile", "Jobseekr")">My Profile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewProfile", "Jobseekr")">My Companies</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("AllCompanyProfiles", "Jobseekr")">All Companies</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewJobApplications", "Jobseekr")>Job Applications</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href=@Url.Action("ViewEmployeeReviews", "Jobseekr")>Employee Reviews</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        <!-- navbar area -->
+    </header>
+    <!-- End Header Area -->
+    <!-- Start Job Edit Section -->
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title">Job Information</h3>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.JobId)
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Job title*</label>
+                                        @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Job Location</label>
+                                        @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Salary</label>
+                                        @Html.TextBoxFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Posted Date</label>
+                                        <div class="input-group date" id="datetimepicker">
+                                            @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control" } })                                            <span class="input-group-addon"></span>
+                                            <i class="bx bx-calendar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Job Description*</label>
+                                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-n2 button">
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                    @Html.ActionLink("Back to Jobs", "WelcomePage", null, new { @class = "d-block btn btn-alt" })
+                                </div>
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                    <!-- Add a hidden field for EmployerId, because it shouldn't be visible to employer when editing the job -->
+                                    @Html.HiddenFor(model => model.EmployerId)
+                                    <input type="submit" value="Save" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.PostedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.PostedDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PostedDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!-- Add a hidden field for EmployerId (because it shouldn't be visible to employer when editing the job)-->
-    @Html.HiddenFor(model => model.EmployerId)
-
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "WelcomePage")
-</div>
+    </section>
+    <!-- End Job Edit Section -->
+</body>
+</html>
