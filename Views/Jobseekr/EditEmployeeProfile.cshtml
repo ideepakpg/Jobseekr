@@ -1,76 +1,145 @@
 ﻿@model Jobseekr.Models.EmployeeLogin
 
 @{
-    ViewBag.Title = "EditEmployeeProfile";
+    ViewBag.Title = "Employee Profile";
 }
 
-<h2>EditEmployeeProfile</h2>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>EmployeeLogin</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/AvailableJobs">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeProfile", "Jobseekr")" class="active">My Profile</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")">Compnay Profiles</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Enquiry", "Jobseekr")">Enquiry</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeInbox", "Jobseekr")">Inbox </a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")">Application Status</a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>                      
+                      <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title"> Edit Employee Profile</h3>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>UserName</label>
+                                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        @Html.DisplayFor(model => model.Role, new { @class = "control-label col-md-2" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Mobile No</label>
+                                        @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-n2 button">
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+                                    @Html.ActionLink("Back to Profile", "EmployeeProfile", null, new { @class = "d-block btn btn-alt" })
+                                </div>
+                                <div class="col-xl-auto col-lg-12 col-sm-auto col-12 p-2">
+
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
+    </section>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmailId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.Role)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to Profile", "EmployeeProfile")
-</div>
+</body>
+</html>
