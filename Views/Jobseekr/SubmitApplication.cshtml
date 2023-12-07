@@ -4,26 +4,130 @@
     ViewBag.Title = "Submit Application";
 }
 
-<h2>Submit Job Application</h2>
 
-@using (Html.BeginForm("SubmitApplication", "Jobseekr", FormMethod.Post))
-{
-    @Html.HiddenFor(model => model.JobId)
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ApplicantName)
-        @Html.TextBoxFor(model => model.ApplicantName, new { @class = "form-control" })
-    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ApplicantEmail)
-        @Html.TextBoxFor(model => model.ApplicantEmail, new { @class = "form-control" })
-    </div>
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Header Area -->
+    <header class="header other-page">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand logo" href="/Jobseekr/AvailableJobs">
+                                <img class="logo1" src="~/assets/images/logo/logo.jpg" alt="Logo" />
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeProfile", "Jobseekr")">My Profile</a>
 
-    <div class="form-group">
-        @Html.Label("Resume (Google Drive Link only)")
-        @Html.TextBoxFor(model => model.Resume, new { @class = "form-control" })
-    </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewCompanyProfiles", "Jobseekr")">Compnay Profiles</a>
 
-    <button type="submit" class="btn btn-primary">Apply</button>
-}
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("Enquiry", "Jobseekr")">Enquiry</a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("EmployeeInbox", "Jobseekr")">Inbox </a>
+
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="@Url.Action("ViewMyJobApplicationStatus", "Jobseekr")">Application Status</a>
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- navbar collapse -->
+                            <div class="button">
+                                <a href="@Url.Action("Logout", "Jobseekr")" data-toggle="modal" data-target="@Url.Action("Logout", "Jobseekr")" class="login">
+                                    <i class="lni lni-exit"></i> Logout
+                                </a>
+                            </div>
+                        </nav>
+                        <!-- navbar -->
+                    </div>
+                </div>
+                <!-- row -->
+            </div>
+            <!-- container -->
+        </div>
+        <!-- navbar area -->
+    </header>
+    <!-- Start Submit Job Application Section -->
+    <section class="job-post section">
+        <div class="container">
+            <div class="row">
+                @using (Html.BeginForm("SubmitApplication", "Jobseekr", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(model => model.JobId)
+
+                    <div class="col-lg-10 offset-lg-1 col-12">
+                        <div class="job-information">
+                            <h3 class="title">Submit Job Application</h3>
+
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Full Name*</label>
+                                        @Html.TextBoxFor(model => model.ApplicantName, new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                        <label>Email*</label>
+                                        @Html.TextBoxFor(model => model.ApplicantEmail, new { @class = "form-control", required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="choose-img">
+                                        <div class="form-group">
+                                            <label>Resume*</label>
+                                            @Html.TextBoxFor(model => model.Resume, new { @class = "form-control", placeholder = "Enter Google Drive Link Only", required = "required" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group checkboxs">
+                                        <input type="checkbox" class="checkboxs" id="chb2" required>
+                                        <p>
+                                            By clicking checkbox, you agree to our <a href="#">Terms & Conditions</a> And <a href="#">Privacy Policy.</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 button">
+                                    <button type="submit" class="btn" onclick="setRedirectUrl()">Apply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- End Submit Job Application Section -->
+</body>
+</html>
