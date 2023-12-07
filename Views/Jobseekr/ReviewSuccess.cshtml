@@ -1,19 +1,49 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ReviewSuccess";
 }
 
-<h2>ReviewSuccess</h2>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<div class="container mt-5">
-    <h2 class="text-center">Review Success</h2>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-    <div class="alert alert-success" role="alert">
-        Thank you for your review!
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Error Area -->
+    <div class="maill-success">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="success-content">
+                        <h1>Woohoo!</h1>
+                        <h2>Review Submitted Successfully</h2>
+                        <p>Thank you for sharing your feedback with us!</p>
+                        <div class="button">
+                            <a href="/jobseekr/AvailableJobs" class="btn">Back to Available Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- End Error Area -->
 
-    <div class="text-center">
-        <a href="@Url.Action("AvailableJobs", "Jobseekr")" class="btn btn-primary">Back to Available Jobs</a>
-    </div>
-</div>
+    <script>
+        window.onload = function () {
+            window.setTimeout(fadeout, 500);
+        }
 
+        function fadeout() {
+            document.querySelector('#loading-area').style.opacity = '0';
+            document.querySelector('#loading-area').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
