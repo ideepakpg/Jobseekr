@@ -126,16 +126,19 @@
                     {
                         <div class="col-lg-6 col-12">
                             <div class="single-job">
+                                <div class="job-image">
+                                    <img src="~/assets/images/logo/review.png" alt="Review logo" style="width: 50px; height: 50px;">
+                                </div>
                                 <div class="job-content">
-                                    <h4>                                      
+                                    <h4>
                                         <h5>JobId: @Html.DisplayFor(modelItem => item.JobId)</h5>
-                                    </h4>                        
+                                    </h4>
                                     <h4>
                                         <h5>EmployeeID: @Html.DisplayFor(modelItem => item.EmployeeId)</h5>
                                     </h4>
                                     <ul>
                                         <h4>Rating:</h4>
-                                       <li><i class="lni lni"></i> @RenderStarRating(item.Rating)</li>
+                                        <li><i class="lni lni"></i> @RenderStarRating(item.Rating)</li>
                                     </ul>
                                     <br />
                                     <h5>
