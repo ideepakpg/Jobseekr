@@ -4,47 +4,80 @@
     ViewBag.Title = "Employer Registration";
 }
 
-<h2>Employer Registration</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-@using (Html.BeginForm("EmployerRegistration", "Jobseekr", new { area = "" }, FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName)
-        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.FirstName)
+    <!-- Font Icon -->
+    <link href="~/assets/signup/fonts/material-icon/css/material-design-iconic-font.css" rel="stylesheet" />
+
+    <!-- Main css -->
+    <link href="~/assets/signup/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Sign up form -->
+    <div class="signup-content">
+        <div class="signup-form">
+            <h2 class="form-title">Sign up</h2>
+            <form method="POST" class="register-form" id="register-form">
+                @using (Html.BeginForm("EmployerRegistration", "Jobseekr", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <label for="FirstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" name="FirstName" id="FirstName" placeholder="First Name" required pattern=".{3,10}" title="Please enter between 3 and 10 characters" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="LastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" name="LastName" id="LastName" placeholder="Last Name" required pattern=".{3,10}" title="Please enter between 3 and 10 characters" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input type="text" name="Username" id="Username" placeholder="User Name" required pattern=".{5,10}" title="Please enter between 5 and 10 characters" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="EmailId"><i class="zmdi zmdi-email"></i></label>
+                        <input type="email" name="EmailId" id="EmailId" placeholder="Email" required="required" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Password"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="Password" id="Password" placeholder="Password" required pattern=".{6,20}" title="Please enter between 6 and 20 characters" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="MobileNumber"><i class="zmdi zmdi-phone"></i></label>
+                        <input type="tel" name="MobileNumber" id="MobileNumber" placeholder="Mobile Number" required pattern="[0-9]{10}" title="Please enter a valid 10-digit mobile number" />
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                    </div>
+
+                    <div>
+                        <a href="/jobseekr/Registration" class="signup-image-link">Are you an Employee ? Sign up here</a>
+                    </div>
+
+                }
+            </form>
+        </div>
+        <div class="signup-image">
+            <img src="~/assets/signup/images/employer-image.jpg" />
+            <a href="/jobseekr/Login" class="signup-image-link">Already have an account ? Login here</a>
+        </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName)
-        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.LastName)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.EmailId)
-        @Html.TextBoxFor(model => model.EmailId, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.EmailId)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Username)
-        @Html.TextBoxFor(model => model.Username, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Username)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password)
-        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Password)
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MobileNumber)
-        @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.MobileNumber)
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-}
+    <!-- JS -->
+    <script src="~/assets/signup/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/signup/js/main.js"></script>
+</body>
+</html>

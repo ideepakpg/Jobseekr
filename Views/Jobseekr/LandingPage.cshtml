@@ -1,9 +1,10 @@
 ﻿﻿@{
-    ViewBag.Title = "LandingPage";
+    ViewBag.Title = "Jobseekr";
 }
 
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -11,27 +12,8 @@
     <meta name="description" content="" />
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
-
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    <!-- Web Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
-    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
 </head>
+
 <body>
     <div id="loading-area"></div>
     <!-- New code for navigation -->
@@ -54,18 +36,15 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="active" href="@Url.Action("LandingPage", "Jobseekr")">Home</a>
+                                        <a href="#home-section">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#">Jobs</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="#">Latest Jobs</a></li>
-                                        </ul>
+                                        <a href="#find-job-section">Jobs</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="#">Companies</a>
+                                        <a href="#clients-section">Companies</a>
                                         <ul class="sub-menu">
-                                            <li><a href="#">Top Companies</a></li>
+                                            <li><a href="#clients-section">Top Companies</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -87,7 +66,7 @@
     </header>
     <!-- End Header Area -->
     <!-- Start Welcome Area -->
-    <section class="hero-area style2">
+    <section id="home-section" class="hero-area style2">
         <!-- Single Slider -->
         <div class="hero-inner">
             <div class="home-slider">
@@ -102,11 +81,11 @@
                                             Better Life
                                         </h1>
                                         <p class="wow fadeInUp" data-wow-delay=".5s">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ipa qui officia deserunt mollit anim id est laborum.
+                                            Explore fulfilling opportunities aligned with your aspirations. Join us in shaping a meaningful career journey.
                                         </p>
                                         <div class="button wow fadeInUp" data-wow-delay=".7s">
-                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Post a Job</a>
-                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
+                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn">Post a Job</a>
+                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="single-slider">
+                @*<div class="single-slider">
                     <div class="container">
                         <div class="row ">
                             <div class="col-lg-6 co-12">
@@ -130,23 +109,23 @@
                                             Better Life
                                         </h1>
                                         <p class="wow fadeInUp" data-wow-delay=".5s">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor ipa qui officia deserunt mollit anim id est laborum.
+                                            Explore fulfilling opportunities aligned with your aspirations. Join us in shaping a meaningful career journey.
                                         </p>
                                         <div class="button wow fadeInUp" data-wow-delay=".7s">
-                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Post a Job</a>
-                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
+                                            <a href="@Url.Action("EmployerRegistration", "Jobseekr")" class="btn">Post a Job</a>
+                                            <a href="@Url.Action("Registration", "Jobseekr")" class="btn btn-alt">See Our Jobs</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 co-12">
                                 <div class="hero-image wow fadeInRight" data-wow-delay=".ss">
-                                    <img src="~/assets/images/hero/hero-image.png" alt="Image">
+                                    <img src="~/assets/images/hero/hero-image2.png" alt="Image"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <!--/ End Single Slider -->
@@ -163,7 +142,7 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="button">
-                        <a href="browse-jobs.html" class="btn">Browse Jobs</a>
+                        <a href="@Url.Action("Registration", "Jobseekr")" class="btn">Browse Jobs</a>
                     </div>
                 </div>
             </div>
@@ -179,8 +158,7 @@
                         <span class="wow fadeInDown" data-wow-delay=".2s">Job Category</span>
                         <h2 class="wow fadeInUp" data-wow-delay=".4s">Choose Your Desire Category</h2>
                         <p class="wow fadeInUp" data-wow-delay=".6s">
-                            There are many variations of passages of Lorem
-                            Ipsum available, but the majority have suffered alteration in some form.
+                            Discover diverse career options tailored to your preferences. Choose a category that aligns with your goals and interests for a rewarding professional journey.
                         </p>
                     </div>
                 </div>
@@ -256,6 +234,98 @@
         </div>
     </section>
     <!-- /End Job Category Area -->
+    <!-- Start Job Alert Area -->
+    <section class="about-us section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-6 col-md-10 col-12">
+                    <div class="content-left wow fadeInLeft" data-wow-delay=".3s">
+                        <div calss="row">
+                            <div calss="col-lg-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <img src="~/assets/images/landing page/Picture1.jpg" alt="Image" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <img src="~/assets/images/landing page/Picture2.jpg" alt="Image" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div calss="col-lg-6 col-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <img src="~/assets/images/landing page/Picture3.jpg" alt="Image" />
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-6">
+                                        <!-- media body start -->
+                                        <div class="media-body">
+                                            <i class="lni lni-checkmark"></i>
+                                            <h6 class="">Job alert!</h6>
+                                            <p class="">
+                                                104 new jobs are available in this week!
+                                            </p>
+                                        </div>
+                                        <!-- media body start -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-10 col-12">
+                    <!-- content-1 start -->
+                    <div class="content-right wow fadeInRight" data-wow-delay=".5s">
+                        <!-- Heading -->
+                        <h2>
+                            Help you to get the <br>
+                            best job that fits you
+                        </h2>
+                        <!-- End Heading -->
+                        <!-- Single List -->
+                        <div class="single-list">
+                            <i class="lni lni-grid-alt"></i>
+                            <!-- List body start -->
+                            <div class="list-bod">
+                                <h5>#1 Jobs site in India</h5>
+                                <p>
+                                    Providing a robust platform for high-level overviews, our site is the #1 destination for job opportunities in the India.
+                                </p>
+                            </div>
+                            <!-- List body start -->
+                        </div>
+                        <!-- End Single List -->
+                        <!-- Single List -->
+                        <div class="single-list">
+                            <i class="lni lni-search"></i>
+                            <!-- List body start -->
+                            <div class="list-bod">
+                                <h5>Seamless searching</h5>
+                                <p>
+                                    Our seamless search functionality allows you to identify potential opportunities easily, making your job search efficient and effective.
+                                </p>
+                            </div>
+                            <!-- List body start -->
+                        </div>
+                        <!-- End Single List -->
+                        <!-- Single List -->
+                        <div class="single-list">
+                            <i class="lni lni-stats-up"></i>
+                            <!-- List body start -->
+                            <div class="list-bod">
+                                <h5>Hired in top companies</h5>
+                                <p>
+                                Experience operational change management inside workflows, leading to successful placements in top companies.
+                                </p>
+                            </div>
+                            <!-- List body start -->
+                        </div>
+                        <!-- End Single List -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Job Alert Area -->
     <!-- Start Apply Process Area -->
     <section class="apply-process section">
         <div class="container">
@@ -285,51 +355,464 @@
         </div>
     </section>
     <!--/ End Apply Process Area -->
+    <!-- Start Find Job Area -->
+    <section id="find-job-section" class="find-job section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Hot Jobs</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Browse Recent Jobs</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            Uncover a variety of opportunities in our latest job listings. While there may be many variations of passages, our job listings remain consistently updated to match your career aspirations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-head">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".3s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon1.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Software Engineer</a></h4>
+                                <p>
+                                    Join us as a Software Engineer and contribute to innovative projects in San Francisco. Competitive salary offered.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> thinkpalm.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹20k - ₹25k</li>
+                                    <li><i class="lni lni-map-marker"></i> Kochi</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Full time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".3s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon2.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Graphics Design</a></h4>
+                                <p>
+                                    Exciting opportunity for a Graphics Designer! Join our very creative team and manage 30-35 appointments weekly.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> letsdesign.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹15k - ₹20k</li>
+                                    <li><i class="lni lni-map-marker"></i> Calicut</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Intern</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".3s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon3.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Ui/Ux Design</a></h4>
+                                <p>
+                                    Join us for a rewarding UI/UX Designer role. Contribute to user-friendly designs in our dynamic team. Seeking passionate individuals for transformative experiences.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> tcs.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹30k - ₹50k</li>
+                                    <li><i class="lni lni-map-marker"></i> Banglore</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Part Time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".3s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon4.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Web Developer</a></h4>
+                                <p>
+                                    Join us as a Web Developer, crafting innovative web solutions. Seeking skilled individuals for exciting projects, pushing the boundaries of development.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> infosys.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹35k - ₹45k</li>
+                                    <li><i class="lni lni-map-marker"></i> Mumbai</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Intern</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".5s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon5.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Digital Marketer</a></h4>
+                                <p>
+                                    Join us for an exciting Digital Marketer role, pivotal in driving online success. Seeking creative minds to strategize and implement impactful digital campaigns.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> digmarketers.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹10k - ₹20k</li>
+                                    <li><i class="lni lni-map-marker"></i> Noida</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Part Time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".5s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon6.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Sales Manager</a></h4>
+                                <p>
+                                    Lead our dynamic sales team! Join as a Sales Manager. Seeking motivated individuals to elevate our sales initiatives.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> techmac.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹30k - ₹35k</li>
+                                    <li><i class="lni lni-map-marker"></i> Trivandrum</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>full time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".5s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon7.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Product Designer</a></h4>
+                                <p>
+                                    Join us as a Product Designer, shaping cutting-edge products. Seeking talented individuals passionate about impactful and user-centric design.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> ibm.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹20k - ₹25k</li>
+                                    <li><i class="lni lni-map-marker"></i> Ahmedabad</li>
+                                </ul>
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>full time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                        <!-- Single Job -->
+                        <div class="single-job wow fadeInUp" data-wow-delay=".5s">
+                            <div class="job-image">
+                                <img src="~/assets/images/landing page/icon8.png" alt="Job Icon" />
+                            </div>
+                            <div class="job-content">
+                                <h4><a>Android Developer</a></h4>
+                                <p>
+                                    Explore an exciting Android Developer role with us. Join to work on cutting-edge apps, shaping the future of mobile tech. Seeking passionate and skilled individuals.
+                                </p>
+                                <ul>
+                                    <li><i class="lni lni-website"></i><a href="#"> androiddev.com</a></li>
+                                    <li><i class="lni lni-rupee"></i> ₹20k - ₹35k</li>
+                                    <li><i class="lni lni-map-marker"></i> Chennai</li>
+                                </ul>
 
+                            </div>
+                            <div class="job-button">
+                                <ul>
+                                    <li><a href="@Url.Action("Login", "Jobseekr")">Apply</a></li>
+                                    <li><span>Part Time</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End Single Job -->
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="pagination center wow fadeInUp" data-wow-delay=".3s">
+                            <ul class="pagination-list">
+                                <li><a href="#"><i class="lni lni-arrow-left"></i></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="lni lni-arrow-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Pagination -->
+            </div>
+        </div>
+    </section>
+    <!-- /End Find Job Area -->
+    <!-- Start Upload Resume Area -->
+    <section class="call-action overlay section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <div class="inner">
+                        <div class="section-title">
+                            <span class="wow fadeInDown" data-wow-delay=".2s">GETTING STARTED TO WORK</span>
+                            <h2 class="wow fadeInUp" data-wow-delay=".4s">
+                                Don’t just find. Be found. Put your
+                                CV in front of great employers
+                            </h2>
+                            <p class="wow fadeInUp" data-wow-delay=".6s">
+                                It helps you to increase your chances of
+                                finding a suitable job and let recruiters contact you
+                                about jobs that are not needed to pay for advertising.
+                            </p>
+                            <div class="button wow fadeInUp" data-wow-delay=".8s">
+                                <a href="@Url.Action("Login", "Jobseekr")" class="btn"><i class="lni lni-upload"></i> Upload Your Resume</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Upload Resume Area -->
+    <!-- Start Featured Job Area -->
+    <section class="featured-job section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <span class="wow fadeInDown" data-wow-delay=".2s">Featured Jobs</span>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Browse Featured Jobs</h2>
+                        <p class="wow fadeInUp" data-wow-delay=".6s">
+                            Unlock a multitude of career possibilities as you delve into our curated selection of standout job opportunities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="single-head">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".2s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob1.jpg" alt="Job Icon"/>
+                            </div>
+                            <div class="content">
+                                <h4><a>Graphics Design</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Kochi</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 80K-90K</li>
+                                </ul>
+                                <p>
+                                    Hiring Graphics Designer in Kochi. Full-time role, competitive salary 80K-90K. Apply now.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".4s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob2.jpg" alt="Job Icon"/>
+                            </div>
+                            <div class="content">
+                                <h4><a>Restaurant Services</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Chennai</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 60K-70K</li>
+                                </ul>
+                                <p>
+                                    Explore opportunities as a Restaurant Services Manager in Chennai. Join us and enhance our restaurant services.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".6s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob3.jpg" alt="Job Icon" />
+                            </div>
+                            <div class="content">
+                                <h4><a>Share Market Analysis</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Mumbai</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 80K-90K</li>
+                                </ul>
+                                <p>
+                                    Explore a career as a Share Market Analyst with a competitive salary range of 90K to 100K. Join us now.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".2s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob4.jpg" alt="Job Icon" />
+                            </div>
+                            <div class="content">
+                                <h4><a>Medical services</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Goa</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 50K-650K</li>
+                                </ul>
+                                <p>
+                                    Join us as a Medical Services Coordinator in Goa. Contribute to the delivery of quality healthcare environment.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".4s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob5.jpg" alt="Job Icon" />
+                            </div>
+                            <div class="content">
+                                <h4><a>Auto Mobile Services</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Calicut</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 80K-90K</li>
+                                </ul>
+                                <p>
+                                    Explore a career as an Automobile Services Technician. Join us to contribute your skills to repair of automotive environments.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="single-job wow fadeInUp" data-wow-delay=".6s">
+                            <div class="shape"></div>
+                            <div class="feature">Featured</div>
+                            <div class="image">
+                                <img src="~/assets/images/landing page/featuredjob6.jpg" alt="Job Icon" />
+                            </div>
+                            <div class="content">
+                                <h4><a>IT & Networing Sevices</a></h4>
+                                <ul>
+                                    <li><i class="lni lni-map-marker"></i> Noida</li>
+                                    <li><i class="lni lni-briefcase"></i> Full-time</li>
+                                    <li><i class="lni lni-rupee"></i> 40K-50K</li>
+                                </ul>
+                                <p>
+                                    Join us as an IT & Networking Specialist in Noida. Full-time role with a competitive salary. Contribute your expertise.
+                                </p>
+                                <div class="button">
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn">Apply Now</a>
+                                    <a href="@Url.Action("Login", "Jobseekr")" class="btn save"><i class="lni lni-bookmark"></i> Save It</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Featured Job Area -->
     <!-- Start Clients Area -->
-    <div class="client-logo-section">
+    <div id="clients-section" class="client-logo-section">
         <div class="container">
             <div class="client-logo-wrapper">
                 <div class="client-logo-carousel d-flex align-items-center justify-content-between">
                     <div class="client-logo">
-                        <img src="assets/images/clients/client1.png" alt="#">
+                        <img src="assets/images/clients/client2.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client2.png" alt="#">
+                        <img src="assets/images/clients/client3.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client3.png" alt="#">
+                        <img src="assets/images/clients/client5.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client4.png" alt="#">
+                        <img src="assets/images/clients/client6.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client5.png" alt="#">
+                        <img src="assets/images/clients/client2.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client6.png" alt="#">
+                        <img src="assets/images/clients/client3.png" alt="Client logo">
                     </div>
                     <div class="client-logo">
-                        <img src="assets/images/clients/client2.png" alt="#">
-                    </div>
-                    <div class="client-logo">
-                        <img src="assets/images/clients/client3.png" alt="#">
-                    </div>
-                    <div class="client-logo">
-                        <img src="assets/images/clients/client4.png" alt="#">
+                        <img src="assets/images/clients/client5.png" alt="Client logo">
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- End Clients Area -->
-  
-    <!-- ========================= JS ========================= -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/wow.min.js"></script>
-    <script src="assets/js/tiny-slider.js"></script>
-    <script src="assets/js/glightbox.min.js"></script>
-    <script src="assets/js/main.js"></script>
+
     <script type="text/javascript">
         //====== Clients Logo Slider
         tns({
@@ -369,7 +852,11 @@
             gutter: 0,
             items: 1,
             nav: false,
-            controls: false, // Set controls to false to hide the arrows
+            controls: false, // Set controls to true to show the arrows, and uncomment the below code
+            //controlsText: [
+            //    '<i class="lni lni-arrow-left prev"></i>',
+            //    '<i class="lni lni-arrow-right next"></i>'
+            //],
             responsive: {
                 1200: {
                     items: 1,

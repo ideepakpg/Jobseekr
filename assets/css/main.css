@@ -885,16 +885,16 @@ ol {
 
 /* Bread Crumbs */
 .breadcrumbs {
-  background-color: #081828;
-  position: relative;
-  padding: 70px 0;
-  padding-top: 150px;
-  background-image: url("https://via.placeholder.com/1900x770");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 2;
-  text-align: left;
+    background-color: #081828;
+    position: relative;
+    padding: 70px 0;
+    padding-top: 150px;
+    background-image: url('../images/breadcrumb/breadcrumb.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 2;
+    text-align: left;
 }
 
 .breadcrumbs.overlay::before {
@@ -4296,11 +4296,11 @@ blockquote .shape {
     Call Action CSS
 ========================================*/
 .call-action {
-  background-image: url("../images/call-action/cat-bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
-  z-index: 2;
+    background-image: url('../images/landing page/upload-resume-area.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
 }
 
 .call-action.style2 {

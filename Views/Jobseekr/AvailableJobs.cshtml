@@ -123,8 +123,8 @@
                                     <h4><a href="job-details.html">@jobListing.JobTitle</a></h4>
                                     <p>@jobListing.Description</p>
                                     <ul>
-                                        <li><i class="lni lni-website"></i><a>@jobListing.PostedDate</a></li>
-                                        <li><i class="lni lni-dollar"></i> @jobListing.Salary</li>
+                                        <li><i class="lni lni-website"></i><a>@jobListing.PostedDate.ToString("yyyy-MM-dd")</a></li>
+                                        <li><i class="lni lni-rupee"></i> @jobListing.Salary.ToString("N0")</li>
                                         <li><i class="lni lni-map-marker"></i> @jobListing.Location</li>
                                     </ul>
                                 </div>
