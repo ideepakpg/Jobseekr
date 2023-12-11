@@ -344,6 +344,7 @@
     <Content Include="assets\signup\scss\layouts\main.scss" />
     <Content Include="assets\signup\scss\layouts\responsive.scss" />
     <Content Include="assets\signup\scss\style.scss" />
+    <None Include="Properties\PublishProfiles\jobseekrr - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
