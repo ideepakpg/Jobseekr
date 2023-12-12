@@ -3,21 +3,49 @@
     ViewBag.Title = "RegistrationSuccess";
 }
 
-<h2>RegistrationSuccess</h2>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
 
-<div class="text-center">
-    <p>Your registration was successful. You can now log in.</p>
-    <a href="@Url.Action("Login", "Jobseekr")" class="btn btn-primary btn-login">Login Now</a>
-</div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+</head>
 
-<style>
-    .btn-login {
-        transition: background-color 0.3s, color 0.3s;
-    }
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Error Area -->
+    <div class="maill-success">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="success-content">
+                        <h1>Hurray!</h1>
+                        <h2>Your registration was successful.</h2>
+                        <p>You can now log in.</p>
+                        <div class="button">
+                            <a href="/jobseekr/Login" class="btn">Login Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Error Area -->
 
-        .btn-login:hover {
-            background-color: #007bff;
-            color: #fff;
+    <script>
+        window.onload = function () {
+            window.setTimeout(fadeout, 500);
         }
-</style>
+
+        function fadeout() {
+            document.querySelector('#loading-area').style.opacity = '0';
+            document.querySelector('#loading-area').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
 

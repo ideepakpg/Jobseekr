@@ -63,13 +63,13 @@
                         <!-- Single Widget -->
                         <div class="f-about single-footer">
                             <div class="logo">
-                                <a href="index.html"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
+                                <a href="#"><img src="~/assets/images/logo/logo.jpg" alt="Logo"></a>
                             </div>
-                            <p>Lorem ipsum</p>
+                            <p>Discover rewarding possibilities that resonate with your ambitions. Come join us in crafting a purposeful career path.</p>
                             <ul class="contact-address">
-                                <li><span>Address:</span> 555 Wall Street, USA, NY</li>
-                                <li><span>Email:</span> example@apus.com</li>
-                                <li><span>Call:</span> 555-555-1234</li>
+                                <li><span>Address:</span> Aluva, Kerala, India</li>
+                                <li><span>Email:</span> jobseekr@outlook.com</li>
+                                <li><span>Call:</span> 999-888-7776</li>
                             </ul>
                             <div class="footer-social">
                                 <ul>
@@ -118,18 +118,39 @@
                                 <!-- Single Widget -->
                                 <div class="single-footer newsletter">
                                     <h3>Join Our Newsletter</h3>
-                                    <p>Subscribe to get the latest jobs posted, candidates...</p>
-                                    <form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-                                        <input name="EMAIL" placeholder="Your email address" class="common-input"
+                                    <p>Subscribe to get the latest jobs posted and more</p>
+                                    <form id="newsletterForm" action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
+                                        <input id="emailInput" name="EMAIL" placeholder="Your email address" class="common-input"
                                                onfocus="this.placeholder = ''"
                                                onblur="this.placeholder = 'Your email address'" required="" type="email">
                                         <div class="button">
-                                            <button class="btn">Subscribe Now! <span class="dir-part"></span></button>
+                                            <button id="subscribeButton" class="btn" onclick="subscribe()">Subscribe Now! <span class="dir-part"></span></button>
                                         </div>
                                     </form>
                                 </div>
                                 <!-- End Single Widget -->
+
+                                <script>
+                                    function subscribe() {
+                                        const form = document.getElementById("newsletterForm");
+                                        const emailInput = document.getElementById("emailInput");
+
+                                        // Check if the form is valid
+                                        if (form.checkValidity()) {
+
+                                            // Clear the email input field
+                                            emailInput.value = "";
+
+                                            // Refresh the page
+                                            location.reload();
+                                        } else {
+                                            // If the form is not valid, submit the form to display validation messages
+                                            form.reportValidity();
+                                        }
+                                    }
+                                </script>
                             </div>
+
                         </div>
                     </div>
                 </div>
