@@ -1,4 +1,4 @@
-# Jobseekr - ASP.NET MVC Project
+# Jobseekr - ASP.NET MVC Application
 
 **Jobseekr** is an **ASP.NET MVC** application designed to streamline the job-seeking process for both employers and employees. The platform allows employers to post jobs, manage applications, and interact with potential candidates. On the other hand, employees can apply for jobs, send enquiries, and review employers.
 
@@ -67,6 +67,29 @@
 ## Deployment
 
 The application is deployed to Azure. You can access the live version at [here](https://jobseekrr.azurewebsites.net/).
+
+## Screenshots
+
+![Screenshot (34)](https://github.com/ideepakpg/Jobseekr/assets/123804790/95aaff6e-4735-476e-8166-65780d8144ba)
+
+### Employee
+
+![Screenshot (43)](https://github.com/ideepakpg/Jobseekr/assets/123804790/43ae54ac-1c06-4e6b-891d-c49f9a238a5d)
+![Screenshot (44)](https://github.com/ideepakpg/Jobseekr/assets/123804790/e2129aa7-c3b3-4822-acc4-969e4854a9de)
+![Screenshot (64)](https://github.com/ideepakpg/Jobseekr/assets/123804790/d70436c7-c082-4e59-b04f-0339669e2443)
+
+### Employer
+
+![Screenshot (66)](https://github.com/ideepakpg/Jobseekr/assets/123804790/47db35a4-2949-4296-9eeb-13302eb70321)
+![Screenshot (87)](https://github.com/ideepakpg/Jobseekr/assets/123804790/45908261-c6a9-4860-9038-6e54cdb265a3)
+
+### Admin
+
+![Screenshot (115)](https://github.com/ideepakpg/Jobseekr/assets/123804790/230ca88f-df70-4e95-a147-ec3e27c0c5bf)
+![Screenshot (116)](https://github.com/ideepakpg/Jobseekr/assets/123804790/e430e1e2-f738-4447-8ed1-a9f5634d266b)
+
+
+Screenshots for every page are not included; explore the application for additional features and pages. 
 
 
 ## Contributors
