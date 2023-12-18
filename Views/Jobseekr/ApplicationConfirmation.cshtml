@@ -2,10 +2,52 @@
     ViewBag.Title = "Application Confirmation";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center">Application Submitted</h2>
-    <p class="text-center">Your job application has been successfully submitted. You will receive a confirmation email.</p>
-    <div class="text-center">
-        <a href="@Url.Action("AvailableJobs", "Jobseekr")" class="btn btn-primary">Go back to jobs</a>
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Application Confirmation</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: blue;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn:hover {
+                background-color: black;
+                color: #fff;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="loading-area"></div>
+    <!-- Start Success Area -->
+    <div class="maill-success">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container mt-5">
+                    <h2 class="text-center">Application Submitted</h2>
+                    <p class="text-center">Your job application has been successfully submitted. You will receive a confirmation email.</p>
+                    <div class="text-center">
+                        <a href="/jobseekr/AvailableJobs" class="btn">Back to Available Jobs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+    <!-- End Success Area -->
+</body>
+</html>

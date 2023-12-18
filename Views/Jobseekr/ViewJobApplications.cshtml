@@ -125,7 +125,7 @@
                                     </h5>
                                     <ul>
                                         <li><i class="lni lni-envelope"></i>@Html.DisplayFor(modelItem => item.ApplicantEmail)</li>
-                                        <li><i class="lni lni-link"></i> @Html.DisplayFor(modelItem => item.Resume)</li>
+                                        <li><i class="lni lni-link"></i> <a href="@Html.DisplayFor(modelItem => item.Resume)" target="_blank">Resume</a></li>
                                         <li><i class="lni lni-reply"></i>@Html.DisplayFor(modelItem => item.ResponseStatus)</li>
                                         <li><span class="label">Employee ID:</span>@Html.DisplayFor(modelItem => item.EmployeeId)</li>
                                     </ul>
